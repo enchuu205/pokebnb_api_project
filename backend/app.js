@@ -11,6 +11,8 @@ const isProduction = environment === 'production';
 
 const app = express();
 
+const routes = require('./routes');
+
 app.use(morgan('dev'));
 
 app.use(cookieParser());
@@ -40,10 +42,7 @@ app.use(
     })
 );
 
-// backend/app.js
-const routes = require('./routes');
 
-// ...
 
 app.use(routes); // Connect all the routes
 
