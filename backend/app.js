@@ -9,9 +9,9 @@ const cookieParser = require('cookie-parser');
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 
-const app = express();
-
 const routes = require('./routes');
+
+const app = express();
 
 const { ValidationError } = require('sequelize');
 
