@@ -58,7 +58,7 @@ module.exports = {
         allowNull: false
       },
       price: {
-        type: Sequelize.DECIMAL(2),
+        type: Sequelize.DECIMAL,
         allowNull: false
       },
       createdAt: {
@@ -71,7 +71,7 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    });
+    }, options);
   },
   async down(queryInterface, Sequelize) {
     options.tableName = 'Spots';
