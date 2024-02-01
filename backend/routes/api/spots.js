@@ -1,7 +1,7 @@
 // backend/routes/api/spots.js
 const express = require('express')
 
-const { Spot, SpotImage, Review } = require('../../db/models');
+const { Spot, SpotImage, Review, User } = require('../../db/models');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 
 const { check } = require('express-validator');
@@ -19,6 +19,7 @@ function avgRating(reviews) {
     })
     return stars / count
 }
+
 
 // Get all Spots owned by the Current User /api/spots/current
 router.get('/current', requireAuth, async (req, res) => {
@@ -47,6 +48,29 @@ router.get('/current', requireAuth, async (req, res) => {
     return res.json({
         Spots: spots,
     })
+})
+
+// Get details of a Spot from an id /api/spots/:spotId
+router.get('/:spotId', async (req, res) => {
+    const { spotId } = req.params
+    const spot = await Spot.findOne({ where: { id: spotId } })
+
+    if (!spot) return res.status(404).json({ message: "Spot couldn't be found" })
+
+    const spotImgs = await SpotImage.findAll({ where: { spotId: spotId }, attributes: ['id', 'url', 'preview'] })
+    const owner = await User.findOne({ where: { id: spot.ownerId }, attributes: ['id', 'firstName', 'lastName'] })
+
+    let review = await Review.findAll({
+        where: {
+            spotId: spot.id
+        }
+    })
+    spot.setDataValue('SpotImages', spotImgs || null)
+    spot.setDataValue('numReviews', review.length || 0)
+    spot.setDataValue('avgRating', avgRating(review) || null)
+    spot.setDataValue('Owner', owner || null)
+
+    return res.json(spot)
 })
 
 

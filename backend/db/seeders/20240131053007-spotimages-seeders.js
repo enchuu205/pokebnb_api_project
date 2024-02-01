@@ -17,6 +17,11 @@ module.exports = {
         preview: true
       },
       {
+        spotId: 1,
+        url: 'https://pbs.twimg.com/media/FsN3z_yWYAEa7bh.jpg:large',
+        preview: true
+      },
+      {
         spotId: 2,
         url: 'https://pbs.twimg.com/media/FsN3z_yWYAEa7bh.jpg:large',
         preview: false
