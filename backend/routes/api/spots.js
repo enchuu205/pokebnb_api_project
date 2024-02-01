@@ -20,6 +20,60 @@ function avgRating(reviews) {
     return stars / count
 }
 
+const validateSpot = [
+    check('address')
+        .exists({ checkFalsy: true })
+        .isString()
+        .withMessage("Street address is required"),
+    check('city')
+        .exists({ checkFalsy: true })
+        .isString()
+        .withMessage("City is required"),
+    check('state')
+        .exists({ checkFalsy: true })
+        .isString()
+        .withMessage("State is required"),
+    check('country')
+        .exists({ checkFalsy: true })
+        .isString()
+        .withMessage("Country is required"),
+    check('lat')
+        .notEmpty()
+        .isFloat({ min: -90, max: 90 })
+        .withMessage("Latitude must be within -90 and 90"),
+    check('lng')
+        .notEmpty()
+        .isFloat({ min: -180, max: 180 })
+        .withMessage("Longitude must be within -180 and 180"),
+    check('name')
+        .exists({ checkFalsy: true })
+        .isString()
+        .isLength({ max: 49 })
+        .withMessage("Name must be less than 50 characters"),
+    check('description')
+        .exists({ checkFalsy: true })
+        .isString()
+        .withMessage("Description is required"),
+    check('price')
+        .notEmpty()
+        .isFloat({ min: 0 })
+        .withMessage("Price per day must be a positive number"),
+    handleValidationErrors
+];
+
+// Create a Spot /api/spots
+router.post('/', requireAuth, validateSpot, async (req, res) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
+
+    const { user } = req;
+    const ownerId = user.id
+
+    const newSpot = await Spot.create({ ownerId, address, city, state, country, lat, lng, name, description, price });
+
+    return res.status(201).json(newSpot)
+})
+
+
 
 // Get all Spots owned by the Current User /api/spots/current
 router.get('/current', requireAuth, async (req, res) => {
