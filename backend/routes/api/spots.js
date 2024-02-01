@@ -61,6 +61,24 @@ const validateSpot = [
     handleValidationErrors
 ];
 
+
+// Add an Image to a Spot based on the Spot's id /api/spots/:spotId/images
+router.post('/:spotId/images', requireAuth, async (req, res) => {
+    const { spotId } = req.params
+    const { url, preview } = req.body
+    const { user } = req;
+
+    const spot = await Spot.findOne({ where: { id: spotId } })
+    if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
+    if (spot.ownerId != user.id) res.status(404).json({ message: "Only the owner of the spot is authorized to add an image" })
+
+    const newSpotImg = await SpotImage.create({ spotId, url, preview })
+
+    return res.json({ spotId: newSpotImg.spotId, url: newSpotImg.url, preview: newSpotImg.preview })
+
+})
+
+
 // Create a Spot /api/spots
 router.post('/', requireAuth, validateSpot, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
@@ -147,12 +165,52 @@ router.get('/', async (req, res) => {
                 spotId: spots[i].id
             }
         })
+        // Add possibility to have multiple spotImg previews?
         spotImg.preview ? spots[i].setDataValue('previewImage', spotImg.url) : spots[i].setDataValue('previewImage', null)
     }
 
     return res.json({
         Spots: spots,
     })
+})
+
+// Edit a Spot /api/spots/:spotId
+router.put('/:spotId', requireAuth, async (req, res) => {
+    const { spotId } = req.params
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const { user } = req
+
+    const spot = await Spot.findOne({ where: { id: spotId } })
+    if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
+    if (spot.ownerId != user.id) res.status(404).json({ message: "Only the owner of the spot is authorized to edit" })
+
+    address ? spot.address = address : spot.address
+    city ? spot.city = city : spot.city
+    state ? spot.state = state : spot.state
+    country ? spot.country = country : spot.country
+    lat ? spot.lat = lat : spot.lat
+    lng ? spot.lng = lng : spot.lng
+    name ? spot.name = name : spot.name
+    description ? spot.description = description : spot.description
+    price ? spot.price = price : spot.price
+
+    await spot.save()
+
+    return res.json(spot)
+})
+
+// Delete a Spot /api/spots/:spotId
+router.delete('/:spotId', requireAuth, async (req, res) => {
+    const { spotId } = req.params
+    const { user } = req
+
+    const spot = await Spot.findOne({ where: { id: spotId } })
+    if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
+    if (spot.ownerId != user.id) res.status(404).json({ message: "Only the owner of the spot is authorized to delete" })
+
+    await spot.destroy()
+
+    return res.json({ message: "Successfully deleted" })
 })
 
 module.exports = router;
