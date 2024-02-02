@@ -82,16 +82,16 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
     const { review, stars } = req.body
 
     const spot = await Spot.findOne({ where: { id: spotId } })
-    if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
+    if (!spot) return res.status(404).json({ message: `Spot couldn't be found` })
 
     const existReview = await Review.findOne({ where: { userId: user.id, spotId: spotId } })
-    if (existReview) res.status(500).json({ message: "User already has a review for this spot" })
+    if (existReview) return res.status(500).json({ message: "User already has a review for this spot" })
 
     spotId = parseInt(spotId)
 
     const newReview = await Review.create({ userId: user.id, spotId: spotId, review, stars })
 
-    res.status(201).json(newReview)
+    return res.status(201).json(newReview)
 })
 
 
@@ -100,7 +100,7 @@ router.get('/:spotId/reviews', async (req, res) => {
     const { spotId } = req.params
 
     const spot = await Spot.findOne({ where: { id: spotId } })
-    if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
+    if (!spot) return res.status(404).json({ message: `Spot couldn't be found` })
 
     const reviews = await Review.findAll({
         where: { spotId: spotId },
@@ -115,7 +115,7 @@ router.get('/:spotId/reviews', async (req, res) => {
             }
         ]
     })
-    res.json({ Reviews: reviews })
+    return res.json({ Reviews: reviews })
 })
 
 // Add an Image to a Spot based on the Spot's id /api/spots/:spotId/images
@@ -125,8 +125,8 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     const { user } = req;
 
     const spot = await Spot.findOne({ where: { id: spotId } })
-    if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
-    if (spot.ownerId != user.id) res.status(403).json({ message: "Forbidden" })
+    if (!spot) return res.status(404).json({ message: `Spot couldn't be found` })
+    if (spot.ownerId != user.id) return res.status(403).json({ message: "Forbidden" })
 
 
 
@@ -241,8 +241,8 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
     const { user } = req
 
     const spot = await Spot.findOne({ where: { id: spotId } })
-    if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
-    if (spot.ownerId != user.id) res.status(403).json({ message: "Forbidden" })
+    if (!spot) return res.status(404).json({ message: `Spot couldn't be found` })
+    if (spot.ownerId != user.id) return res.status(403).json({ message: "Forbidden" })
 
     address ? spot.address = address : spot.address
     city ? spot.city = city : spot.city
@@ -265,8 +265,8 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     const { user } = req
 
     const spot = await Spot.findOne({ where: { id: spotId } })
-    if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
-    if (spot.ownerId != user.id) res.status(403).json({ message: "Forbidden" })
+    if (!spot) return res.status(404).json({ message: `Spot couldn't be found` })
+    if (spot.ownerId != user.id) return res.status(403).json({ message: "Forbidden" })
 
     await spot.destroy()
 
