@@ -111,12 +111,13 @@ router.get('/current', requireAuth, async (req, res) => {
 
 
         // Spot Image Preview
-        let spotImg = await SpotImage.findOne({
+        let spotImgPreview = await SpotImage.findOne({
             where: {
-                spotId: spots[i].id
+                spotId: spots[i].id,
+                preview: true
             }
         })
-        spotImg.preview ? spots[i].setDataValue('previewImage', spotImg.url) : spots[i].setDataValue('previewImage', null)
+        spotImgPreview ? spots[i].setDataValue('previewImage', spotImgPreview.url) : spots[i].setDataValue('previewImage', null)
     }
 
     return res.json({
@@ -162,13 +163,13 @@ router.get('/', async (req, res) => {
         spots[i].setDataValue('avgRating', avgRating(reviews) || null)
 
         // Spot Image Preview
-        let spotImg = await SpotImage.findOne({
+        let spotImgPreview = await SpotImage.findOne({
             where: {
-                spotId: spots[i].id
+                spotId: spots[i].id,
+                preview: true
             }
         })
-        // Add possibility to have multiple spotImg previews?
-        if (spotImg) spotImg.preview ? spots[i].setDataValue('previewImage', spotImg.url) : spots[i].setDataValue('previewImage', null)
+        spotImgPreview ? spots[i].setDataValue('previewImage', spotImgPreview.url) : spots[i].setDataValue('previewImage', null)
     }
 
 
