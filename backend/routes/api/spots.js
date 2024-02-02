@@ -1,7 +1,7 @@
 // backend/routes/api/spots.js
 const express = require('express')
 
-const { Spot, SpotImage, Review, User } = require('../../db/models');
+const { Spot, SpotImage, Review, User, ReviewImage } = require('../../db/models');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 
 const { check } = require('express-validator');
@@ -61,6 +61,62 @@ const validateSpot = [
     handleValidationErrors
 ];
 
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .isString()
+        .notEmpty()
+        .withMessage("Review text is required"),
+    check('stars')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .isInt({ min: 1, max: 5 })
+        .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+]
+
+// Create a Review for a Spot based on the Spot's id /api/spots/:spotId/reviews
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+    const { user } = req
+    let { spotId } = req.params
+    const { review, stars } = req.body
+
+    const spot = await Spot.findOne({ where: { id: spotId } })
+    if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
+
+    const existReview = await Review.findOne({ where: { userId: user.id, spotId: spotId } })
+    if (existReview) res.status(500).json({ message: "User already has a review for this spot" })
+
+    spotId = parseInt(spotId)
+
+    const newReview = await Review.create({ userId: user.id, spotId: spotId, review, stars })
+
+    res.status(201).json(newReview)
+})
+
+
+// Get all Reviews by a Spot's id /api/spots/:spotId/reviews
+router.get('/:spotId/reviews', async (req, res) => {
+    const { spotId } = req.params
+
+    const spot = await Spot.findOne({ where: { id: spotId } })
+    if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
+
+    const reviews = await Review.findAll({
+        where: { spotId: spotId },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: ReviewImage,
+                attributes: { exclude: ['preview', 'reviewId', 'createdAt', 'updatedAt'] }
+            }
+        ]
+    })
+    res.json({ Reviews: reviews })
+})
 
 // Add an Image to a Spot based on the Spot's id /api/spots/:spotId/images
 router.post('/:spotId/images', requireAuth, async (req, res) => {
