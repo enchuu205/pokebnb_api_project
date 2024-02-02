@@ -70,11 +70,13 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
 
     const spot = await Spot.findOne({ where: { id: spotId } })
     if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
-    if (spot.ownerId != user.id) res.status(404).json({ message: "Only the owner of the spot is authorized to add an image" })
+    if (spot.ownerId != user.id) res.status(403).json({ message: "Forbidden" })
 
-    const newSpotImg = await SpotImage.create({ spotId, url, preview })
 
-    return res.json({ spotId: newSpotImg.spotId, url: newSpotImg.url, preview: newSpotImg.preview })
+
+    const newSpotImg = await SpotImage.create({ spotId: spot.id, url, preview })
+
+    return res.json({ id: newSpotImg.spotId, url: newSpotImg.url, preview: newSpotImg.preview })
 
 })
 
@@ -166,8 +168,9 @@ router.get('/', async (req, res) => {
             }
         })
         // Add possibility to have multiple spotImg previews?
-        spotImg.preview ? spots[i].setDataValue('previewImage', spotImg.url) : spots[i].setDataValue('previewImage', null)
+        if (spotImg) spotImg.preview ? spots[i].setDataValue('previewImage', spotImg.url) : spots[i].setDataValue('previewImage', null)
     }
+
 
     return res.json({
         Spots: spots,
@@ -175,14 +178,14 @@ router.get('/', async (req, res) => {
 })
 
 // Edit a Spot /api/spots/:spotId
-router.put('/:spotId', requireAuth, async (req, res) => {
+router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
     const { spotId } = req.params
     const { address, city, state, country, lat, lng, name, description, price } = req.body
     const { user } = req
 
     const spot = await Spot.findOne({ where: { id: spotId } })
     if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
-    if (spot.ownerId != user.id) res.status(404).json({ message: "Only the owner of the spot is authorized to edit" })
+    if (spot.ownerId != user.id) res.status(403).json({ message: "Forbidden" })
 
     address ? spot.address = address : spot.address
     city ? spot.city = city : spot.city
@@ -206,7 +209,7 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 
     const spot = await Spot.findOne({ where: { id: spotId } })
     if (!spot) res.status(404).json({ message: `Spot couldn't be found` })
-    if (spot.ownerId != user.id) res.status(404).json({ message: "Only the owner of the spot is authorized to delete" })
+    if (spot.ownerId != user.id) res.status(403).json({ message: "Forbidden" })
 
     await spot.destroy()
 

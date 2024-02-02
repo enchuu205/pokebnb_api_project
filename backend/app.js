@@ -69,20 +69,6 @@ app.use((err, _req, _res, next) => {
     next(err);
 });
 
-// Process sequelize errors
-app.use((err, _req, _res, next) => {
-    // check if error is a Sequelize error:
-    if (err instanceof ValidationError) {
-        let errors = {};
-        for (let error of err.errors) {
-            errors[error.path] = error.message;
-        }
-        err.title = 'Validation error';
-        err.errors = errors;
-    }
-    next(err);
-});
-
 // Error formatter
 app.use((err, _req, res, _next) => {
     res.status(err.status || 500);
@@ -94,8 +80,5 @@ app.use((err, _req, res, _next) => {
         stack: isProduction ? null : err.stack
     });
 });
-
-
-
 
 module.exports = app;
