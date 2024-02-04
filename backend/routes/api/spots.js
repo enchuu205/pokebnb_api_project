@@ -228,7 +228,6 @@ router.get('/', async (req, res) => {
         spotImgPreview ? spots[i].setDataValue('previewImage', spotImgPreview.url) : spots[i].setDataValue('previewImage', null)
     }
 
-
     return res.json({
         Spots: spots,
     })

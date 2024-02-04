@@ -76,12 +76,12 @@ router.get('/current', requireAuth, async (req, res) => {
             {
                 model: Spot,
                 attributes: { exclude: ['description', 'createdAt', 'updatedAt'] },
-                include: {
-                    model: SpotImage,
-                    as: 'previewImage',
-                    attributes: ['url'],
-                    where: { preview: true }
-                }
+                // include: {
+                //     model: SpotImage,
+                //     as: 'previewImage',
+                //     attributes: ['url'],
+                //     where: { preview: true }
+                // }
             },
             {
                 model: ReviewImage,
@@ -89,8 +89,25 @@ router.get('/current', requireAuth, async (req, res) => {
             }
         ]
     })
+
+    for (i = 0; i < reviews.length; i++) {
+        // Attach Spot Image Preview
+        let spotImgPreview = await SpotImage.findOne({
+            where: {
+                spotId: reviews[i].Spot.id,
+                preview: true
+            }
+        })
+
+        reviews[i].Spot.dataValues.previewImage = spotImgPreview.url
+    }
+
     return res.json({ 'Reviews': reviews })
 })
+
+// ,spot, reviewimage]
+// let spotimg = await spotimg.findone(where: spotId)
+
 
 // Delete a Review /api/reviews/:reviewId
 router.delete('/:reviewId', requireAuth, async (req, res) => {
