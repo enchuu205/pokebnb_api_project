@@ -96,7 +96,7 @@ router.get('/current', requireAuth, async (req, res) => {
         where: { userId: user.id },
         include: {
             model: Spot,
-            attributes: { exclude: ['createdAt', 'updatedAt'] },
+            attributes: { exclude: ['description', 'createdAt', 'updatedAt'] },
         }
     })
 
