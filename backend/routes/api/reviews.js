@@ -99,7 +99,7 @@ router.get('/current', requireAuth, async (req, res) => {
             }
         })
 
-        reviews[i].Spot.dataValues.previewImage = spotImgPreview.url
+        spotImgPreview ? reviews[i].Spot.dataValues.previewImage = spotImgPreview.url : reviews[i].Spot.dataValues.previewImage = null
     }
 
     return res.json({ 'Reviews': reviews })

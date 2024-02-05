@@ -108,7 +108,7 @@ router.get('/current', requireAuth, async (req, res) => {
                 preview: true
             }
         })
-        spotImgPreview ? bookings[i].setDataValue('previewImage', spotImgPreview.url) : bookings[i].setDataValue('previewImage', null)
+        spotImgPreview ? bookings[i].Spot.dataValues.previewImage = spotImgPreview.url : bookings[i].Spot.dataValues.previewImage = null
     }
 
     return res.json({ 'Bookings': bookings })
