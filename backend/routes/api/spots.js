@@ -1,7 +1,7 @@
 // backend/routes/api/spots.js
 const express = require('express')
 
-const { Spot, SpotImage, Review, User, ReviewImage } = require('../../db/models');
+const { Spot, SpotImage, Review, User, ReviewImage, Booking } = require('../../db/models');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 
 const { check } = require('express-validator');
@@ -74,6 +74,55 @@ const validateReview = [
         .withMessage("Stars must be an integer from 1 to 5"),
     handleValidationErrors
 ]
+
+// Create a Booking from a Spot based on the Spot's id /api/spots/:spotId/bookings
+router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+    const { user } = req
+    let { spotId } = req.params
+    const { startDate, endDate } = req.body
+
+    spotId = parseInt(spotId)
+
+    const booking = await Booking.create({
+        spotId,
+        userId: user.id,
+        startDate,
+        endDate
+    })
+    return res.json(booking)
+})
+
+// Get all Bookings for a Spot based on the Spot's id /api/spots/:spotId/bookings
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+    const { user } = req
+    let { spotId } = req.params
+    let bookings = null
+
+    const spot = await Spot.findOne({ where: { id: spotId } })
+    if (!spot) return res.status(404).json({ message: `Spot couldn't be found` })
+
+    spotId = parseInt(spotId)
+    console.log(spot)
+
+    //If you ARE the owner of the spot.
+    if (spot.ownerId === user.id) {
+        bookings = await Booking.findAll({
+            where: { spotId: spotId },
+            include: {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            }
+        })
+    } else {
+        // If you ARE NOT the owner of the spot.
+        bookings = await Booking.findAll({
+            where: { spotId: spotId },
+            attributes: ['spotId', 'startDate', 'endDate']
+        })
+    }
+    return res.json({ Bookings: bookings })
+})
+
 
 // Create a Review for a Spot based on the Spot's id /api/spots/:spotId/reviews
 router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
