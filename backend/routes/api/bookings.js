@@ -7,25 +7,85 @@ const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth')
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+const { Op } = require("sequelize");
+
 const router = express.Router();
 
+const validateStartEndDates = [
+    check('startDate')
+        .exists({ checkFalsy: true })
+        .custom((value, { req }) => {
+            let startDateValidate = new Date(value)
+            let currentDate = new Date()
+
+            if (startDateValidate < currentDate) {
+                return false
+            }
+            return true
+        })
+        .withMessage('startDate cannot be in the past'),
+    check('endDate')
+        .exists({ checkFalsy: true })
+        .custom((value, { req }) => {
+            let startDateValidate = new Date(req.body.startDate)
+            let endDateValidate = new Date(value)
+
+            if (endDateValidate <= startDateValidate) {
+                return false
+            }
+            return true
+        })
+        .withMessage('endDate cannot be on or before startDate'),
+    handleValidationErrors
+]
+
 // Edit a Booking /api/bookings/:bookingId
-router.put('/:bookingId', requireAuth, async (req, res) => {
+router.put('/:bookingId', requireAuth, validateStartEndDates, async (req, res) => {
     const { user } = req
     const { bookingId } = req.params
     const { startDate, endDate } = req.body
+    const currentDate = new Date()
 
-    let existBooking = await Booking.findOne({
+    let editBooking = await Booking.findOne({
         where: { id: bookingId }
     })
-    if (!existBooking) return res.status(404).json({ message: "Booking couldn't be found" })
+    if (!editBooking) return res.status(404).json({ message: "Booking couldn't be found" })
+    if (user.id != editBooking.userId) return res.status(403).json({ message: 'Forbidden' })
 
-    startDate ? existBooking.startDate = startDate : existBooking.startDate
-    endDate ? existBooking.endDate = endDate : existBooking.endDate
+    if (new Date(startDate) < currentDate || new Date(endDate) < currentDate) {
+        return res.status(403).json({
+            message: "Past bookings can't be modified"
+        })
+    }
 
-    await existBooking.save()
+    // Booking Conflict
+    const existBooking = await Booking.findOne({
+        where: {
+            id: { [Op.ne]: bookingId },
+            spotId: editBooking.spotId,
+            [Op.and]: [
+                { startDate: { [Op.lte]: new Date(endDate) } },
+                { endDate: { [Op.gte]: new Date(startDate) } }
+            ]
+        }
+    })
 
-    return res.json(existBooking)
+    if (existBooking) {
+        return res.status(403).json({
+            message: "Sorry, this spot is already booked for the specified dates",
+            error: {
+                startDate: "Start date conflicts with an existing booking",
+                endDate: "End Date conflicts with an existing booking"
+            }
+        })
+    }
+
+    startDate ? editBooking.startDate = startDate : editBooking.startDate
+    endDate ? editBooking.endDate = endDate : editBooking.endDate
+
+    await editBooking.save()
+
+    return res.json(editBooking)
 })
 
 // Get all of the Current User's Bookings /api/bookings/current
@@ -48,8 +108,7 @@ router.get('/current', requireAuth, async (req, res) => {
                 preview: true
             }
         })
-
-        bookings[i].Spot.dataValues.previewImage = spotImgPreview.url
+        spotImgPreview ? bookings[i].setDataValue('previewImage', spotImgPreview.url) : bookings[i].setDataValue('previewImage', null)
     }
 
     return res.json({ 'Bookings': bookings })

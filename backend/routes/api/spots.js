@@ -146,24 +146,34 @@ router.post('/:spotId/bookings', [requireAuth, validateStartEndDates], async (re
     const { user } = req
     let { spotId } = req.params
     const { startDate, endDate } = req.body
+    const currentDate = new Date()
 
     const spot = await Spot.findOne({ where: { id: spotId } })
     if (!spot) return res.status(404).json({ message: `Spot couldn't be found` })
     if (user.id === spot.ownerId) return res.status(403).json({ message: 'Forbidden' })
 
-    // // // tester code
-    // // const bookings = await Booking.findAll({
-    // //     where: {
-    // //         spotId: spotId,
-    // //     }
-    // // })
-    // // console.log((new Date(bookingtest.startDate)))
-    // // console.log((new Date(bookingtest.endDate)))
+    // Booking Conflict
+    const existBooking = await Booking.findOne({
+        where: {
+            spotId: spotId,
+            [Op.and]: [
+                { startDate: { [Op.lte]: new Date(endDate) } },
+                { endDate: { [Op.gte]: new Date(startDate) } }
+            ]
+        }
+    })
 
-    // // console.log(new Date(startDate))
-    // // console.log(new Date(endDate))
+    if (existBooking) {
+        return res.status(403).json({
+            message: "Sorry, this spot is already booked for the specified dates",
+            error: {
+                startDate: "Start date conflicts with an existing booking",
+                endDate: "End Date conflicts with an existing booking"
+            }
+        })
+    }
 
-    // // Booking Conflict
+
     // const startDateConflict = await Booking.findOne({
     //     where: {
     //         spotId: spotId,
@@ -186,9 +196,6 @@ router.post('/:spotId/bookings', [requireAuth, validateStartEndDates], async (re
     //         ]
     //     }
     // })
-
-    // // console.log('start', startDateConflict)
-    // // console.log('end', endDateConflict)
 
     // if (startDateConflict && endDateConflict) {
     //     return res.status(403).json({
@@ -310,11 +317,9 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     if (!spot) return res.status(404).json({ message: `Spot couldn't be found` })
     if (spot.ownerId != user.id) return res.status(403).json({ message: "Forbidden" })
 
-
-
     const newSpotImg = await SpotImage.create({ spotId: spot.id, url, preview })
 
-    return res.json({ id: newSpotImg.spotId, url: newSpotImg.url, preview: newSpotImg.preview })
+    return res.json({ id: newSpotImg.id, url: newSpotImg.url, preview: newSpotImg.preview })
 
 })
 
