@@ -67,9 +67,14 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 
     // Booking must belong to the current user or the Spot must belong to the current user
     if (user.id === existBooking.userId || user.id === bookedSpot.ownerId) {
+        // Bookings that have been started can't be deleted
+        if (new Date(existBooking.startDate) <= new Date()) return res.status(403).json({ message: "Bookings that have been started can't be deleted" })
+
         await existBooking.destroy()
         res.json({ message: "Successfully deleted" })
-    }
+
+    } else return res.status(403).json({ message: "Forbidden" })
+
 })
 
 
