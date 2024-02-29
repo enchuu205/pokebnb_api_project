@@ -397,15 +397,15 @@ router.get('/', validateQuery, async (req, res) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query
 
     // Pagination
-    page = page || 1
-    size = size || 20
+    page = parseInt(page) || 1
+    size = parseInt(size) || 20
 
     if (page > 10) page = 10
     if (size > 20) size = 20
 
     let paginationObj = {}
     paginationObj.limit = size
-    paginationObj.offet = size * (page - 1)
+    paginationObj.offset = size * (page - 1)
 
     // Query object
     let queryObj = {
@@ -462,8 +462,8 @@ router.get('/', validateQuery, async (req, res) => {
 
     return res.json({
         Spots: spots,
-        page: parseInt(page),
-        size: parseInt(size)
+        page,
+        size
     })
 })
 

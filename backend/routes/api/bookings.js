@@ -1,8 +1,8 @@
 // backend/routes/api/bookings.js
 const express = require('express')
 
-const { Spot, SpotImage, Review, ReviewImage, User, Booking } = require('../../db/models');
-const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
+const { Spot, SpotImage, Booking } = require('../../db/models');
+const { requireAuth } = require('../../utils/auth');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
