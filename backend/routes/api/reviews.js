@@ -79,12 +79,12 @@ router.get('/current', requireAuth, async (req, res) => {
                 // Issue is that previewImage is  formatted as
                 // "previewImage": [{...}, {...}, ...] because there are possible multiple previewImage
                 // is it because of lazy loading is better?
-                // include: {
-                //     model: SpotImage,
-                //     as: 'previewImage',
-                //     attributes: ['url'],
-                //     where: { preview: true }
-                // }
+                include: {
+                    model: SpotImage,
+                    attributes: ['url'],
+                    where: { preview: true },
+                    limit: 1
+                }
             },
             {
                 model: ReviewImage,
@@ -92,20 +92,38 @@ router.get('/current', requireAuth, async (req, res) => {
             }
         ]
     })
+    // console.log(reviews)
+    // console.log(reviews[0].dataValues.Spot.dataValues.SpotImages)
+    let reviewsArr = []
+    reviews.forEach((review) => {
+        reviewsArr.push(review.toJSON())
+    })
 
-    for (i = 0; i < reviews.length; i++) {
-        // Attach Spot Image Preview
-        let spotImgPreview = await SpotImage.findOne({
-            where: {
-                spotId: reviews[i].Spot.id,
-                preview: true
-            }
-        })
+    reviewsArr.forEach((review => {
+        review.Spot.previewImage = review.Spot.SpotImages[0].url
+        delete review.Spot.SpotImages
+    }))
 
-        reviews[i].Spot.dataValues.previewImage = spotImgPreview.url
-    }
 
-    return res.json({ 'Reviews': reviews })
+    // review.dataValues.Spot.dataValues.previewImage = review.dataValues.Spot.dataValues.SpotImages[0].dataValues.url
+    // delete review.dataValues.Spot.dataValues.SpotImages
+
+    // reviews[0].dataValues.Spot.dataValues.previewImage = reviews[0].dataValues.Spot.dataValues.SpotImage[0].dataValues.url
+    // reviews.Spot.previewImage = reviews.Spot.previewImage[0]
+
+    // for (i = 0; i < reviews.length; i++) {
+    //     // Attach Spot Image Preview
+    //     let spotImgPreview = await SpotImage.findOne({
+    //         where: {
+    //             spotId: reviews[i].Spot.id,
+    //             preview: true
+    //         }
+    //     })
+
+    //     spotImgPreview ? reviews[i].Spot.dataValues.previewImage = spotImgPreview.url : reviews[i].Spot.dataValues.previewImage = null
+    // }
+
+    return res.json({ 'Reviews': reviewsArr })
 })
 
 // Delete a Review /api/reviews/:reviewId
