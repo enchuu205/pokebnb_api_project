@@ -2,7 +2,7 @@
 const express = require('express')
 
 const { Spot, SpotImage, Review, ReviewImage, User } = require('../../db/models');
-const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
+const { requireAuth } = require('../../utils/auth');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -76,6 +76,9 @@ router.get('/current', requireAuth, async (req, res) => {
             {
                 model: Spot,
                 attributes: { exclude: ['description', 'createdAt', 'updatedAt'] },
+                // Issue is that previewImage is  formatted as
+                // "previewImage": [{...}, {...}, ...] because there are possible multiple previewImage
+                // is it because of lazy loading is better?
                 // include: {
                 //     model: SpotImage,
                 //     as: 'previewImage',
@@ -99,15 +102,11 @@ router.get('/current', requireAuth, async (req, res) => {
             }
         })
 
-        reviews[i].Spot.dataValues.previewImage = spotImgPreview.url
+        spotImgPreview ? reviews[i].Spot.dataValues.previewImage = spotImgPreview.url : reviews[i].Spot.dataValues.previewImage = null
     }
 
     return res.json({ 'Reviews': reviews })
 })
-
-// ,spot, reviewimage]
-// let spotimg = await spotimg.findone(where: spotId)
-
 
 // Delete a Review /api/reviews/:reviewId
 router.delete('/:reviewId', requireAuth, async (req, res) => {

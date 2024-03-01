@@ -1,8 +1,8 @@
 // backend/routes/api/bookings.js
 const express = require('express')
 
-const { Spot, SpotImage, Review, ReviewImage, User, Booking } = require('../../db/models');
-const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
+const { Spot, SpotImage, Booking } = require('../../db/models');
+const { requireAuth } = require('../../utils/auth');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -96,7 +96,7 @@ router.get('/current', requireAuth, async (req, res) => {
         where: { userId: user.id },
         include: {
             model: Spot,
-            attributes: { exclude: ['createdAt', 'updatedAt'] },
+            attributes: { exclude: ['description', 'createdAt', 'updatedAt'] },
         }
     })
 
@@ -108,7 +108,7 @@ router.get('/current', requireAuth, async (req, res) => {
                 preview: true
             }
         })
-        spotImgPreview ? bookings[i].setDataValue('previewImage', spotImgPreview.url) : bookings[i].setDataValue('previewImage', null)
+        spotImgPreview ? bookings[i].Spot.dataValues.previewImage = spotImgPreview.url : bookings[i].Spot.dataValues.previewImage = null
     }
 
     return res.json({ 'Bookings': bookings })
