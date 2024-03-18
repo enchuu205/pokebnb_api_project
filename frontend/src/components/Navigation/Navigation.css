@@ -5,3 +5,14 @@
 .hidden {
   display: none;
 }
+
+#navigation-logo {
+  height: 25px
+}
+
+#user-button {
+  display: flex;
+  justify-content: space-between;
+  align-content: flex-start;
+  padding: 0px 25px;
+}

@@ -19,7 +19,7 @@ function Layout() {
 
   return (
     <>
-      <Modal/>
+      <Modal />
       <Navigation isLoaded={isLoaded} />
       {isLoaded && <Outlet />}
     </>
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1>Welcome!</h1>
+        element: <h1>Selections:</h1>
       },
       // {
       //   path: 'login',
