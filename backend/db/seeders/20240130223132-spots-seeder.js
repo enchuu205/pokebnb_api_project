@@ -13,39 +13,39 @@ module.exports = {
     await Spot.bulkCreate([
       {
         ownerId: 1,
-        address: '111 Spot 1',
-        city: 'Alhambra',
-        state: 'CA',
-        country: 'USA',
+        address: '1679 Leppa Street',
+        city: 'Lacunosa Town',
+        state: 'Unova',
+        country: 'Gen 5',
         lat: 11.111111,
         lng: -11.111111,
-        name: 'Spot 1',
-        description: 'Test description for Spot 1',
-        price: 123.45
+        name: 'Lacu-Serenity Villa: Where Luxury Meets Seclusion',
+        description: 'Luxurious modern home with rooftop pool for secluded relaxation',
+        price: 300.00
       },
       {
         ownerId: 2,
-        address: '222 Spot 2',
-        city: 'Alhambra',
-        state: 'CA',
-        country: 'USA',
+        address: '8790 Ledyba Way',
+        city: 'Canalave City',
+        state: 'Sinnoh',
+        country: 'Gen 4',
         lat: 22.2222222,
         lng: -22.2222222,
-        name: 'Spot 2',
-        description: 'Test description for Spot 2',
-        price: 123.45
+        name: 'Bridgewater Haven: Serene Retreat with Canal Views and Boat Perks',
+        description: 'Peaceful Retreat with Complimentary Boat Services, Steps from Canalave Library and Iconic Bascule Bridge',
+        price: 850.00
       },
       {
         ownerId: 3,
-        address: '333 Spot 3',
-        city: 'Alhambra',
-        state: 'CA',
-        country: 'USA',
+        address: '182 Snorunt Drive',
+        city: 'Snowpoint City',
+        state: 'Sinnoh',
+        country: 'Gen 4',
         lat: 33.3333333,
         lng: -33.3333333,
-        name: 'Spot 3',
-        description: 'Test description for Spot 3',
-        price: 123.45
+        name: 'Frostfall Lodge: Where Snowy Serenity Meets Ancient Mystique',
+        description: 'Discover Frostfall Lodge, a cozy lodge in perpetual snowfall. Escape to mysterious wonders amidst the eternal winter beauty of Snowpoint Temple',
+        price: 230.00
       }
     ], { validate: true });
   },

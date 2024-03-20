@@ -13,22 +13,17 @@ module.exports = {
     await SpotImage.bulkCreate([
       {
         spotId: 1,
-        url: 'https://archives.bulbagarden.net/media/upload/thumb/c/cc/Player_House_exterior_DPPt.png/250px-Player_House_exterior_DPPt.png',
-        preview: true
-      },
-      {
-        spotId: 1,
-        url: 'https://pbs.twimg.com/media/FsN3z_yWYAEa7bh.jpg:large',
+        url: 'https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925254/lacunosa-town/pljmkfm3r8wxvqi1cj9s.png',
         preview: true
       },
       {
         spotId: 2,
-        url: 'https://pbs.twimg.com/media/FsN3z_yWYAEa7bh.jpg:large',
-        preview: false
+        url: 'https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925170/canalave-city/apgxkx5dvhzyxpyhw7du.png',
+        preview: true
       },
       {
         spotId: 3,
-        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_9Ry-4Dr9IU1FphaAXLOFd9OC4IPOfTvOuTEka1FerOZs0uOWmJkGBy5EjsLQgqxsZzc&usqp=CAU',
+        url: 'https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925294/snowpoint-city/hf337nfslrx3ztjjxaw7.png',
         preview: true
       },
     ])
