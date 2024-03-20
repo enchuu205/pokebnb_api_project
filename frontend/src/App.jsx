@@ -7,6 +7,8 @@ import Navigation from './components/Navigation/Navigation-bonus';
 import * as sessionActions from './store/session';
 import { Modal } from './context/Modal';
 
+import LandingPage from './components/LandingPage';
+
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1>Selections:</h1>
+        element: <LandingPage />
       },
       // {
       //   path: 'login',
