@@ -2,3 +2,18 @@
     width: 300px;
     height: 200px;
 }
+
+.spot-container {
+    border: solid black;
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    height: 300px;
+    cursor: pointer;
+}
+
+.all-spots-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1300px;
+}

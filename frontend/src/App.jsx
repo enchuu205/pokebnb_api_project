@@ -6,8 +6,10 @@ import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation-bonus';
 import * as sessionActions from './store/session';
 import { Modal } from './context/Modal';
+// import { useParams } from 'react-router-dom';
 
 import LandingPage from './components/LandingPage';
+import SpotDetails from './components/SpotDetails/SpotDetails';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -43,7 +45,12 @@ const router = createBrowserRouter([
       // {
       //   path: 'signup',
       //   element: <SignupFormPage />
-      // }
+      // },
+      {
+        path: `/api/spots/:spotId`,
+        element: <SpotDetails />
+      }
+
     ]
   }
 ]);

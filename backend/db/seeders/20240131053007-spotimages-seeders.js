@@ -26,6 +26,16 @@ module.exports = {
         url: 'https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925294/snowpoint-city/hf337nfslrx3ztjjxaw7.png',
         preview: true
       },
+      {
+        spotId: 4,
+        url: 'https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925283/ptfc/i59onhdsjkcorlwznliw.png',
+        preview: true
+      },
+      {
+        spotId: 5,
+        url: 'https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925189/cynthia-home/aqxoves8v27zyukxbjin.png',
+        preview: true
+      },
     ])
   },
 
