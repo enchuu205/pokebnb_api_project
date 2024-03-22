@@ -1,0 +1,19 @@
+.spot-detail-image {
+    height: 200px;
+    width: 300px
+}
+
+.spot-images-container {
+    display: grid;
+    grid-template-rows: 200px 200px;
+    grid-template-columns: 300px 300px 300px 300px;
+    grid-gap: 10px;
+}
+
+.preview-image {
+    height: 400px;
+    width: 600px;
+    display: grid;
+    grid-row: span 2;
+    grid-column: span 2;
+}

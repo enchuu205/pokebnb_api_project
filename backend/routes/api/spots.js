@@ -385,7 +385,7 @@ router.get('/:spotId', async (req, res) => {
     })
     spot.setDataValue('SpotImages', spotImgs || null)
     spot.setDataValue('numReviews', review.length || 0)
-    spot.setDataValue('avgRating', avgRating(review) || null)
+    spot.setDataValue('avgStarRating', avgRating(review) || null)
     spot.setDataValue('Owner', owner || null)
 
     return res.json(spot)

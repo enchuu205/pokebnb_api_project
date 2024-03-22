@@ -17,6 +17,26 @@ module.exports = {
         preview: true
       },
       {
+        spotId: 1,
+        url: 'https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925254/lacunosa-town/rbxfspv5xtaysyafngjn.png',
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: 'https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925255/lacunosa-town/vvusyj9tgka0yxj75yyb.png',
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: 'https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925255/lacunosa-town/dc8pjbc8abt6trhqlhlk.png',
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: 'https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925254/lacunosa-town/spbbknnoj5bsibvjychg.png',
+        preview: false
+      },
+      {
         spotId: 2,
         url: 'https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925170/canalave-city/apgxkx5dvhzyxpyhw7du.png',
         preview: true
@@ -43,7 +63,7 @@ module.exports = {
     options.tableName = 'SpotImages';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 3] }
+      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9] }
     }, {});
   }
 };
