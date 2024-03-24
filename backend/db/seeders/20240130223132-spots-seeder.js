@@ -20,7 +20,7 @@ module.exports = {
         lat: 11.111111,
         lng: -11.111111,
         name: 'Lacu-Serenity Villa: Where Luxury Meets Seclusion',
-        description: 'Luxurious modern home with rooftop pool for secluded relaxation',
+        description: 'Luxurious modern home with rooftop pool for secluded relaxation. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet mattis vulputate enim nulla aliquet porttitor lacus. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing.',
         price: 300.00
       },
       {
@@ -32,7 +32,7 @@ module.exports = {
         lat: 22.2222222,
         lng: -22.2222222,
         name: 'Bridgewater Haven: Serene Retreat with Canal Views and Boat Perks',
-        description: 'Peaceful Retreat with Complimentary Boat Services, Steps from Canalave Library and Iconic Bascule Bridge',
+        description: 'Peaceful Retreat with Complimentary Boat Services, Steps from Canalave Library and Iconic Bascule Bridge. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet mattis vulputate enim nulla aliquet porttitor lacus. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing.',
         price: 850.00
       },
       {
@@ -44,7 +44,7 @@ module.exports = {
         lat: 33.3333333,
         lng: -33.3333333,
         name: 'Frostfall Lodge: Where Snowy Serenity Meets Ancient Mystique',
-        description: 'Discover Frostfall Lodge, a cozy lodge in perpetual snowfall. Escape to mysterious wonders amidst the eternal winter beauty of Snowpoint Temple',
+        description: 'Discover Frostfall Lodge, a cozy lodge in perpetual snowfall. Escape to mysterious wonders amidst the eternal winter beauty of Snowpoint Temple. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet mattis vulputate enim nulla aliquet porttitor lacus. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing.',
         price: 230.00
       },
       {
@@ -56,7 +56,7 @@ module.exports = {
         lat: 44.4444444,
         lng: -44.4444444,
         name: 'Pokemon Trainer Fan Club: Pocket Paradise',
-        description: `A vibrant location for Pokémon enthusiasts, where trainers gather to share their passion for battling and bonding with their beloved companions. Engage in lively discussion and friendly competitions with fellow trainers. It's the ultimate destination for trainers to connect and celebrate their shared love for Pokémon. Steps away from Lilycove Museum, Lilycove Department Store, and Lilycove Shore`,
+        description: `A vibrant location for Pokémon enthusiasts, where trainers gather to share their passion for battling and bonding with their beloved companions. Engage in lively discussion and friendly competitions with fellow trainers. It's the ultimate destination for trainers to connect and celebrate their shared love for Pokémon. Steps away from Lilycove Museum, Lilycove Department Store, and Lilycove Shore. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet mattis vulputate enim nulla aliquet porttitor lacus. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing.`,
         price: 500.00
       },
       {
@@ -69,7 +69,7 @@ module.exports = {
         lng: -33.3333333,
         name: `Cynthia's Seaside: Champion's Cove`,
         description: `
-        "Cynthia's Seaside Haven: Champion's Cove" is a breathtaking sanctuary nestled along the tranquil shores, known as the cherished abode of Pokémon Champion Cynthia.With vast expanses of golden sands stretching as far as the eye can see, this coastal retreat offers ample space for relaxation and Pokémon training alike.As gentle waves kiss the shore and rare Pokémon frolic in the distance, visitors are enveloped in an atmosphere of serenity and adventure unlike any other.`,
+        "Cynthia's Seaside Haven: Champion's Cove" is a breathtaking sanctuary nestled along the tranquil shores, known as the cherished abode of Pokémon Champion Cynthia.With vast expanses of golden sands stretching as far as the eye can see, this coastal retreat offers ample space for relaxation and Pokémon training alike.As gentle waves kiss the shore and rare Pokémon frolic in the distance, visitors are enveloped in an atmosphere of serenity and adventure unlike any other. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet mattis vulputate enim nulla aliquet porttitor lacus. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing.`,
         price: 600.00
       },
       {
@@ -81,7 +81,7 @@ module.exports = {
         lat: 33.3333333,
         lng: -33.3333333,
         name: `Mom's Home: The Place of Beginning`,
-        description: `Reminisce back home by living at Mom's Home, the place where the journey starts. Located near Lake Verity. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+        description: `Reminisce back home by living at Mom's Home, the place where the journey starts. Located near Lake Verity. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet mattis vulputate enim nulla aliquet porttitor lacus. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing.`,
         price: 90.00
       }
     ], { validate: true });

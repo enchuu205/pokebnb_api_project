@@ -49,11 +49,11 @@ module.exports = {
         allowNull: false
       },
       name: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING(255),
         allowNull: false
       },
       description: {
-        type: Sequelize.STRING(),
+        type: Sequelize.TEXT,
         allowNull: false
       },
       price: {

@@ -16,19 +16,19 @@ module.exports = {
       {
         spotId: 1,
         userId: 1,
-        review: 'Place was great! Very spacious.',
+        review: 'Place was great! Very spacious. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet mattis vulputate enim nulla aliquet porttitor lacus. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing.',
         stars: 5
       },
       {
         spotId: 1,
         userId: 2,
-        review: 'Place was okay. Could have been better.',
+        review: 'Place was okay. Could have been better. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet mattis vulputate enim nulla aliquet porttitor lacus. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing.',
         stars: 3
       },
       {
         spotId: 3,
         userId: 3,
-        review: 'Place was not good at all. Too cramped.',
+        review: 'Place was not good at all. Too cramped. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet mattis vulputate enim nulla aliquet porttitor lacus. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing.',
         stars: 1
       }
     ])

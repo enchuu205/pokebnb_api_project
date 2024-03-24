@@ -73,7 +73,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        min: 30
+      }
     },
     price: {
       type: DataTypes.FLOAT,

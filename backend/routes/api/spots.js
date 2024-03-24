@@ -55,7 +55,8 @@ const validateSpot = [
     check('description')
         .exists({ checkFalsy: true })
         .isString()
-        .withMessage("Description is required"),
+        .isLength({ min: 30 })
+        .withMessage("Description needs 30 or more characters"),
     check('price')
         .notEmpty()
         .isFloat({ min: 0 })
