@@ -1,0 +1,12 @@
+.user-button {
+    width: 70px;
+    font-size: x-large;
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.bar-icon {
+    font-size: larger;
+}

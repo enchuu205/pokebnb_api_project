@@ -11,13 +11,14 @@ import { AiFillStar } from "react-icons/ai";
 
 function previewImageChecker(spotImage) {
     if (spotImage.preview) return 'preview-image'
+    return ''
 }
 
 function SpotDetails() {
     let { spotId } = useParams()
     const dispatch = useDispatch()
     const spotDetailsObj = useSelector((state) => state.spots.spotDetails)
-    console.log('hello!!!!!!', spotDetailsObj)
+    // console.log('hello!!!!!!', spotDetailsObj)
 
     useEffect(() => {
         dispatch(loadSpotDetailsThunk(spotId))
@@ -25,26 +26,37 @@ function SpotDetails() {
 
     const spotImagesCreator = spotDetailsObj?.SpotImages.map((spotImage, index) => {
         return (
-            <img key={index} className={'spot-detail-image ' + previewImageChecker(spotImage)} src={spotImage.url} />
+            <img key={index} className={'spot-image ' + previewImageChecker(spotImage)} src={spotImage.url} />
         )
     })
 
     if (!spotDetailsObj) return null
 
     return (
-        <>
+        <div className="spot-details-container">
             <div>this is the spot id from the website path: {spotId}</div>
+            <div className="spot-name">{spotDetailsObj.name}</div>
+            <div className="spot-location">{spotDetailsObj.city}, {spotDetailsObj.state}, {spotDetailsObj.country}</div>
             <div className="spot-images-container">
                 <>{spotImagesCreator}</>
             </div>
-            <div>Hosted By {spotDetailsObj.Owner.firstName + ' ' + spotDetailsObj.Owner.lastName}</div>
-            <div>${spotDetailsObj.price} night</div>
-            <div><AiFillStar /> {Number(spotDetailsObj.avgStarRating).toFixed(1)} - {spotDetailsObj.numReviews} reviews</div>
-            <button onClick={() => alert('Feature Coming Soon...')}>Reserve</button>
+            <div className="description-reservation-container">
+                <div className="description-container">
+                    <div className="spot-host">Hosted by {spotDetailsObj.Owner.firstName + ' ' + spotDetailsObj.Owner.lastName}</div>
+                    <div>{spotDetailsObj.description}</div>
+                </div>
+                <div className="reservation-container">
+                    <div className="spot-price-reviews-container">
+                        <span><span className="spot-price">${spotDetailsObj.price}</span> night</span>
+                        <div><AiFillStar /> {Number(spotDetailsObj.avgStarRating).toFixed(1)} - {spotDetailsObj.numReviews} reviews</div>
+                    </div>
+                    <button className='reserve-button' onClick={() => alert('Feature Coming Soon...')}>Reserve</button>
+                </div>
+            </div>
             <hr></hr>
-            <div><AiFillStar /> {Number(spotDetailsObj.avgStarRating).toFixed(1)} - {spotDetailsObj.numReviews} reviews</div>
-            <Reviews></Reviews>
-        </>
+            <div className="reviews-overall"><AiFillStar /> {Number(spotDetailsObj.avgStarRating).toFixed(1)} - {spotDetailsObj.numReviews} reviews</div>
+            <Reviews />
+        </div>
     )
 }
 

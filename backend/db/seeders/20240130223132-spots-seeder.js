@@ -71,6 +71,18 @@ module.exports = {
         description: `
         "Cynthia's Seaside Haven: Champion's Cove" is a breathtaking sanctuary nestled along the tranquil shores, known as the cherished abode of Pokémon Champion Cynthia.With vast expanses of golden sands stretching as far as the eye can see, this coastal retreat offers ample space for relaxation and Pokémon training alike.As gentle waves kiss the shore and rare Pokémon frolic in the distance, visitors are enveloped in an atmosphere of serenity and adventure unlike any other.`,
         price: 600.00
+      },
+      {
+        ownerId: 2,
+        address: '111 Piplup Boulevard',
+        city: 'Twinleaf Town',
+        state: 'Sinnoh',
+        country: 'Gen 4',
+        lat: 33.3333333,
+        lng: -33.3333333,
+        name: `Mom's Home: The Place of Beginning`,
+        description: `Reminisce back home by living at Mom's Home, the place where the journey starts. Located near Lake Verity. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+        price: 90.00
       }
     ], { validate: true });
   },

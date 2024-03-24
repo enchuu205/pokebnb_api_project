@@ -23,9 +23,9 @@ export const loadReviewsThunk = (spotId) => async (dispatch) => {
 
 // reviews reducer
 const reviewsReducer = (state = {}, action) => {
+    const allReviews = {}
     switch (action.type) {
         case LOAD_REVIEWS:
-            const allReviews = {}
             action.reviews.Reviews.forEach(review => {
                 allReviews[review.id] = review
             })

@@ -8,10 +8,10 @@ function Navigation({ isLoaded }) {
 
   return (
     <>
-      <div id='user-button'>
-        <NavLink to="/">
-          <img id='navigation-logo' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOyo98eJP6sqYgyRyB_tEqYnnZB2QPJuqVBB4g8cnPsA&s' />
-          Pokebnb
+      <div id='navigation-elements'>
+        <NavLink to="/" className='logo'>
+          <img id='logo-image' src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/1200px-Pok%C3%A9_Ball_icon.svg.png' />
+          <span className='logo-text'>Pokebnb</span>
         </NavLink>
         {isLoaded && (
           <div >

@@ -1,18 +1,45 @@
 .profile-dropdown {
   position: absolute;
+  top: 20px;
+  right: 30px;
+  background-color: white;
+  /* display: flex;
+  flex-direction: column; */
+  border: solid black;
+  width: 70px
 }
 
 .hidden {
   display: none;
 }
 
-#navigation-logo {
-  height: 25px
+#logo-image {
+  height: 55px
 }
 
-#user-button {
+#navigation-elements {
   display: flex;
   justify-content: space-between;
   align-content: flex-start;
+  align-items: center;
   padding: 0px 25px;
+}
+
+.logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 30px;
+  color: red;
+  text-decoration: none;
+  font-family: 'Arial';
+  font-weight: bolder;
+  padding-left: 5px;
+}
+
+.button {
+  width: 300px
 }

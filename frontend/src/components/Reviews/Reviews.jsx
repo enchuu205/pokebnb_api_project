@@ -5,25 +5,37 @@ import { useEffect } from 'react'
 
 import './Reviews.css'
 
+function reviewDateFormatter(date) {
+    const monthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'November', 'December']
+    let monthNumber = Number(date.slice(5, 7)) - 1
+    let yearNumber = date.slice(8, 10)
+    return (`${monthArray[monthNumber]} 20${yearNumber}`)
+}
+
 function Reviews() {
     let { spotId } = useParams()
     const dispatch = useDispatch()
+
     const reviewsObj = useSelector((state) => state.reviews)
     const reviews = Object.values(reviewsObj)
-    console.log('reviews obj:', reviewsObj)
+    // console.log('reviews obj:', reviewsObj)
 
     const reviewsCreator = reviews.map((review, index) => {
         return (
-            <div id={index}>{review.review}</div>
+            <div key={index} className='review-container'>
+                <div className='review-name'>{review.User.firstName}</div>
+                <div className='review-date'>{reviewDateFormatter(review.createdAt)}</div>
+                {review.review}
+                <hr />
+            </div>
         )
     })
-
-    if (!reviewsObj) return null
 
     useEffect(() => {
         dispatch(loadReviewsThunk(spotId))
     }, [dispatch, spotId])
 
+    if (!reviewsObj) return null
 
     return (
         <div>{reviewsCreator}</div>

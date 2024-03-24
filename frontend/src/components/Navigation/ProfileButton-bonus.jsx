@@ -4,6 +4,9 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import './ProfileButton.css'
+
+import { BsList } from "react-icons/bs";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -41,7 +44,8 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={toggleMenu}>
+      <button className='user-button' onClick={toggleMenu}>
+        <BsList className='bar-icon' />
         <i className="fas fa-user-circle" />
       </button>
       <ul className={ulClassName} ref={ulRef}>

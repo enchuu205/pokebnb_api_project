@@ -1,0 +1,13 @@
+.review-container {
+    padding-top: 10px
+}
+
+.review-name {
+    font-size: larger;
+    margin-bottom: 5px;
+}
+
+.review-date {
+    color: gray;
+    margin-bottom: 5px;
+}

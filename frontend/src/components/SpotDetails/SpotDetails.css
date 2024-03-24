@@ -1,6 +1,23 @@
-.spot-detail-image {
+.spot-details-container {
+    margin: auto;
+    width: 1200px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.spot-name {
+    font-size: x-large;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.spot-location {
+    padding-bottom: 15px;
+}
+
+.spot-image {
     height: 200px;
-    width: 300px
+    width: 300px;
 }
 
 .spot-images-container {
@@ -11,9 +28,62 @@
 }
 
 .preview-image {
-    height: 400px;
+    height: 410px;
     width: 600px;
     display: grid;
     grid-row: span 2;
     grid-column: span 2;
+}
+
+.description-reservation-container {
+    display: grid;
+    padding-top: 20px;
+    max-width: 1200px;
+    grid-template-columns: 900px 300px;
+    justify-content: space-between;
+}
+
+.description-container {
+    border-style: 'border-box';
+    margin-right: 20px;
+}
+
+.spot-host {
+    font-size: x-large;
+    padding-bottom: 10px;
+}
+
+.reservation-container {
+    border: black solid;
+    width: 300px;
+    height: 75px;
+    border-radius: 15px;
+    border-style: 'border-box';
+    padding: 10px;
+}
+
+.spot-price-reviews-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.spot-price {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.reserve-button {
+    color: white;
+    background-color: red;
+    box-shadow: 3px 3px 3px black;
+    width: 275px;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.reviews-overall {
+    font-size: x-large;
 }

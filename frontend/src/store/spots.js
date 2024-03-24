@@ -48,9 +48,9 @@ export const loadSpotDetailsThunk = (spotId) => async (dispatch) => {
 
 // spots reducer
 const spotsReducer = (state = {}, action) => {
+    const allSpots = {};
     switch (action.type) {
         case LOAD_SPOTS:
-            const allSpots = {};
             action.spots.Spots.forEach(spot => {
                 allSpots[spot.id] = spot
             });
