@@ -77,3 +77,6 @@ function LoginFormModal() {
 }
 
 export default LoginFormModal;
+
+
+// test for missing npm run build
