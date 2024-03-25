@@ -54,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: `/api/spots/new`,
         element: <CreateSpotForm />
+      },
+      {
+        path: '*',
+        element: <h2>Page Not Found</h2>
       }
 
     ]

@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { createSpotThunk, addImageThunk } from "../../store/spots"
 import './CreateSpotForm.css'
 
 export function CreateSpotForm() {
@@ -16,6 +19,9 @@ export function CreateSpotForm() {
     const [image3, setImage3] = useState('')
     const [image4, setImage4] = useState('')
     const [image5, setImage5] = useState('')
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const inputs = [country, streetAddress, city, state, latitude, longitude, description, title, price, previewImage, image2, image3, image4, image5]
 
@@ -35,7 +41,7 @@ export function CreateSpotForm() {
         if (title.length === 0) errors.title = 'Name is required'
         if (price.length === 0) errors.price = 'Price is required'
         if (previewImage.length === 0) errors.previewImage = 'Preview image is required'
-        if (previewImage != null) {
+        if (previewImage != null && !errors.previewImage) {
             const end = previewImage.slice(previewImage.length - 4, previewImage.length)
             const jpeg_end = previewImage.slice(previewImage.length - 5, previewImage.length)
             if (end != '.png' && end != '.jpg' && jpeg_end != '.jpeg') errors.previewImageEnd = 'Image URL must end in .png, .jpg, or .jpeg'
@@ -62,11 +68,45 @@ export function CreateSpotForm() {
             if (end != '.png' && end != '.jpg' && jpeg_end != '.jpeg') errors.image5 = 'Image URL must end in .png, .jpg, or .jpeg'
         }
         setValidationErrors(errors)
+        // console.log(errors)
     }, [...inputs])
 
     const submitSpotForm = (e) => {
         e.preventDefault();
         setSubmit(true)
+
+        const spot = {
+            // ...spot,
+            address: streetAddress,
+            city,
+            state,
+            country,
+            lat: latitude,
+            lng: longitude,
+            name: title,
+            description,
+            price
+        }
+
+        let imagesArr = []
+        previewImage ? imagesArr.push(previewImage) : null
+        image2 ? imagesArr.push(image2) : null
+        image3 ? imagesArr.push(image3) : null
+        image4 ? imagesArr.push(image4) : null
+        image5 ? imagesArr.push(image5) : null
+
+        if (Object.keys(validationErrors).length === 0) {
+            // dispatch the create spot form, and then add the images with the new spot object
+            dispatch(createSpotThunk(spot))
+                .then((spot) => {
+                    dispatch(addImageThunk(spot.id, imagesArr))
+                    return spot
+                })
+                .then((spot) => navigate(`/api/spots/${spot.id}`))
+
+
+
+        }
     }
 
     return (
