@@ -47,7 +47,7 @@ function SpotDetails() {
                 <div className="reservation-container">
                     <div className="spot-price-reviews-container">
                         <span><span className="spot-price">${spotDetailsObj.price}</span> night</span>
-                        <div><AiFillStar /> {spotDetailsObj.avgStarRating && Number(spotDetailsObj.avgStarRating).toFixed(1) + ` · ` + spotDetailsObj.numReviews + ` reviews` || 'New'}</div>
+                        <div><AiFillStar /> {spotDetailsObj.avgStarRating && Number(spotDetailsObj.avgStarRating).toFixed(1) + ` · ` + spotDetailsObj.numReviews + ` review${spotDetailsObj.numReviews > 1 ? 's' : ''}` || 'New'}</div>
                     </div>
                     <button className='reserve-button' onClick={() => alert('Feature Coming Soon...')}>Reserve</button>
                 </div>

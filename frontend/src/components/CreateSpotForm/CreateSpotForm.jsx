@@ -85,7 +85,7 @@ export function CreateSpotForm() {
             lng: longitude,
             name: title,
             description,
-            price
+            price: Number(price)
         }
 
         let imagesArr = []
@@ -206,7 +206,7 @@ export function CreateSpotForm() {
             <hr />
             <div id="price-container">
                 <label>Set a base price for your spot</label>
-                <div>Competitive Pricing can help your listing stand out and rank higher in search results.</div>
+                <div>Competitive pricing can help your listing stand out and rank higher in search results.</div>
                 $<input
                     id="price-input"
                     type="text"

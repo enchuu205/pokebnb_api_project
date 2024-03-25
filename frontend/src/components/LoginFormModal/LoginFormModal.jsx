@@ -24,6 +24,19 @@ function LoginFormModal() {
       });
   };
 
+  const validLogin = () => {
+    // const login_button = document.getElementById('login-button')
+    if (
+      credential.length < 4 ||
+      password.length < 6
+    ) {
+      // login_button.setAttribute("disabled", "");
+      return true
+    }
+    // login_button.removeAttribute('disabled')
+    return false
+  }
+
   const demoUserLogin = (e) => {
     setCredential('DemoUser');
     setPassword('demopassword')
@@ -56,8 +69,8 @@ function LoginFormModal() {
           />
         </label>
         {errors.credential && <p>{errors.credential}</p>}
-        <button id='login-button' type="submit">Log In</button>
-        <button id='demo-user' onClick={demoUserLogin}>Demo User</button>
+        <button id='login-button' disabled={validLogin()} type="submit" className={`${validLogin() ? 'disable' : ''}`} onClick={demoUserLogin} >Log In</button>
+        <button id='demo-user'>Log in as Demo User</button>
       </form>
     </>
   );

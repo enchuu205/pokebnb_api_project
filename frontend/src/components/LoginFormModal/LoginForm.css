@@ -14,6 +14,14 @@
     padding: 10px 0px;
     margin: 10px 0px;
     width: 400px;
+    background-color: rgb(186, 74, 74);
+    color: white;
+    cursor: pointer;
+}
+
+.disable {
+    background-color: gray !important;
+    cursor: unset !important;
 }
 
 #demo-user {
