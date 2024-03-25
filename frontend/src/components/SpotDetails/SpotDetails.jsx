@@ -33,7 +33,7 @@ function SpotDetails() {
 
     return (
         <div className="spot-details-container">
-            <div>this is the spot id from the website path: {spotId}</div>
+            {/* <div>this is the spot id from the website path: {spotId}</div> */}
             <div className="spot-name">{spotDetailsObj.name}</div>
             <div className="spot-location">{spotDetailsObj.city}, {spotDetailsObj.state}, {spotDetailsObj.country}</div>
             <div className="spot-images-container">

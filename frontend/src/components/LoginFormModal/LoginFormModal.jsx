@@ -69,8 +69,8 @@ function LoginFormModal() {
           />
         </label>
         {errors.credential && <p>{errors.credential}</p>}
-        <button id='login-button' disabled={validLogin()} type="submit" className={`${validLogin() ? 'disable' : ''}`} onClick={demoUserLogin} >Log In</button>
-        <button id='demo-user'>Log in as Demo User</button>
+        <button id='login-button' disabled={validLogin()} type="submit" className={`${validLogin() ? 'disable' : ''}`} >Log In</button>
+        <button id='demo-user' onClick={demoUserLogin}>Log in as Demo User</button>
       </form>
     </>
   );
