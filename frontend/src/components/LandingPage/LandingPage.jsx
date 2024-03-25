@@ -14,7 +14,7 @@ function LandingPage() {
     const spots = Object.values(spotsObj)
 
     const spotRouteChange = (spot) => {
-        navigate(`/api/spots/${spot.id}`)
+        navigate(`/spots/${spot.id}`)
     }
 
     useEffect(() => {

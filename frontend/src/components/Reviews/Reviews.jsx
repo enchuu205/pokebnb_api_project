@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import { loadReviewsThunk } from '../../store/reviews'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 import './Reviews.css'
 
@@ -13,10 +13,10 @@ function reviewDateFormatter(date) {
     return (`${monthArray[monthNumber]} 20${yearNumber}`)
 }
 
-function Reviews({ user }) {
+function Reviews() {
     let { spotId } = useParams()
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const reviewsObj = useSelector((state) => state.reviews)
     const reviews = Object.values(reviewsObj)

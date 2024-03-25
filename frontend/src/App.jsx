@@ -48,11 +48,11 @@ const router = createBrowserRouter([
       //   element: <SignupFormPage />
       // },
       {
-        path: `/api/spots/:spotId`,
+        path: `/spots/:spotId`,
         element: <SpotDetails />
       },
       {
-        path: `/api/spots/new`,
+        path: `/spots/new`,
         element: <CreateSpotForm />
       },
       {

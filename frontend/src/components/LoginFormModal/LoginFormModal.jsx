@@ -37,7 +37,7 @@ function LoginFormModal() {
     return false
   }
 
-  const demoUserLogin = (e) => {
+  const demoUserLogin = () => {
     setCredential('DemoUser');
     setPassword('demopassword')
     handleSubmit()
