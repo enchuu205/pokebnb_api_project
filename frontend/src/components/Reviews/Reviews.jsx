@@ -26,7 +26,6 @@ function Reviews() {
                 <div className='review-name'>{review.User.firstName}</div>
                 <div className='review-date'>{reviewDateFormatter(review.createdAt)}</div>
                 {review.review}
-                <hr />
             </div>
         )
     })

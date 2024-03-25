@@ -1,0 +1,63 @@
+.create-spot-form-container {
+    width: 500px;
+    margin: auto;
+}
+
+div>label {
+    font-size: large;
+    font-weight: bold;
+}
+
+input {
+    width: 500px;
+    box-sizing: border-box;
+    padding: 3px 5px;
+    margin: 5px 0px
+}
+
+.validation-text {
+    color: red;
+}
+
+#lat-long-container {
+    display: grid;
+    grid-template-columns: 250px 250px;
+}
+
+#latitude {
+    width: 220px;
+}
+
+#longitude {
+    width: 250px;
+}
+
+#description-text-box {
+    box-sizing: border-box;
+    height: 150px;
+    width: 500px;
+    display: flex;
+    padding: 3px 5px;
+    margin: 5px 0px;
+}
+
+#price-input {
+    margin-left: 5px;
+    width: 485px;
+}
+
+.create-spot-button {
+    background-color: red;
+    color: white;
+    border: black solid 2px;
+    box-shadow: 3px 3px 3px gray;
+    width: 100px;
+    padding: 3px 10px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.create-spot-button:hover {
+    cursor: pointer;
+}

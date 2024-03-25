@@ -24,30 +24,53 @@ function LoginFormModal() {
       });
   };
 
+  const validLogin = () => {
+    // const login_button = document.getElementById('login-button')
+    if (
+      credential.length < 4 ||
+      password.length < 6
+    ) {
+      // login_button.setAttribute("disabled", "");
+      return true
+    }
+    // login_button.removeAttribute('disabled')
+    return false
+  }
+
+  const demoUserLogin = (e) => {
+    setCredential('DemoUser');
+    setPassword('demopassword')
+    handleSubmit()
+  }
+
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+
+      <form onSubmit={handleSubmit} className='login-container'>
+        <h1>Log In</h1>
         <label>
-          Username or Email
           <input
+            className='login-input'
             type="text"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
+            placeholder='Username or Email'
           />
         </label>
         <label>
-          Password
           <input
+            className='login-input'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder='Password'
           />
         </label>
         {errors.credential && <p>{errors.credential}</p>}
-        <button type="submit">Log In</button>
+        <button id='login-button' disabled={validLogin()} type="submit" className={`${validLogin() ? 'disable' : ''}`} onClick={demoUserLogin} >Log In</button>
+        <button id='demo-user'>Log in as Demo User</button>
       </form>
     </>
   );

@@ -1,12 +1,17 @@
 .profile-dropdown {
   position: absolute;
-  top: 20px;
+  top: 45px;
   right: 30px;
   background-color: white;
+  min-width: 150px;
   /* display: flex;
   flex-direction: column; */
   border: solid black;
-  width: 70px
+  padding: 5px 10px 5px 10px
+}
+
+.profile-dropdown>div {
+  padding: 2px
 }
 
 .hidden {
@@ -35,7 +40,6 @@
   font-size: 30px;
   color: red;
   text-decoration: none;
-  font-family: 'Arial';
   font-weight: bolder;
   padding-left: 5px;
 }
