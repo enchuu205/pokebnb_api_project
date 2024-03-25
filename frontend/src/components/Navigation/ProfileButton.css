@@ -20,6 +20,16 @@
     margin-top: 5px;
 }
 
+.user-container {
+    display: flex;
+    align-items: center;
+    color: rgb(64, 101, 133);
+}
+
+#create-spot-button {
+    margin-right: 20px;
+}
+
 .button-container {
     display: flex;
     justify-content: center;

@@ -39,23 +39,20 @@ module.exports = {
         firstName: 'Undel',
         lastName: 'Lickitung'
       },
-<<<<<<< Updated upstream
-      // {
-      //   email: 'amy@user.io',
-      //   username: 'amy',
-      //   hashedPassword: bcrypt.hashSync('password5'),
-      //   firstName: 'Amy',
-      //   lastName: 'Litwick'
-      // }
-=======
       {
         email: 'amy@user.io',
-        username: 'AsparagusSoju',
-        hashedPassword: bcrypt.hashSync('password4'),
+        username: 'amy1234',
+        hashedPassword: bcrypt.hashSync('password5'),
         firstName: 'Amy',
         lastName: 'Litwick'
+      },
+      {
+        email: 'demo@user.io',
+        username: 'DemoUser',
+        hashedPassword: bcrypt.hashSync('demopassword'),
+        firstName: 'Demo',
+        lastName: 'Lition'
       }
->>>>>>> Stashed changes
     ], { validate: true });
   },
 

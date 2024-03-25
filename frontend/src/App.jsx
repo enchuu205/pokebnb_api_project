@@ -10,6 +10,7 @@ import { Modal } from './context/Modal';
 
 import LandingPage from './components/LandingPage';
 import SpotDetails from './components/SpotDetails/SpotDetails';
+import CreateSpotForm from './components/CreateSpotForm';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: `/api/spots/:spotId`,
         element: <SpotDetails />
+      },
+      {
+        path: `/api/spots/new`,
+        element: <CreateSpotForm />
       }
 
     ]

@@ -20,6 +20,10 @@
     font-size: large;
 }
 
+.spot-container:hover .spot-preview-image {
+    box-shadow: 0px 0px 20px 7px gray
+}
+
 .spot-preview-image {
     border: solid black;
     width: 400px;

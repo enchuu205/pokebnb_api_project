@@ -4,11 +4,13 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import { useNavigate } from 'react-router-dom';
 import './ProfileButton.css'
 
 import { BsList } from "react-icons/bs";
 
 function ProfileButton({ user }) {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -44,10 +46,13 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button className='user-button' onClick={toggleMenu}>
-        <BsList className='bar-icon' />
-        <i className="fas fa-user-circle" />
-      </button>
+      <div className='user-container'>
+        {user ? (<div id='create-spot-button' onClick={() => navigate('api/spots/new')}>Create a New Spot</div>) : null}
+        <button className='user-button' onClick={toggleMenu}>
+          <BsList className='bar-icon' />
+          <i className="fas fa-user-circle" />
+        </button>
+      </div>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
