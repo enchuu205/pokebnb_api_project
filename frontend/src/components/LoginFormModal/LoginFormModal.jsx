@@ -24,7 +24,7 @@ function LoginFormModal() {
       });
   };
 
-  const demoUserLogin = () => {
+  const demoUserLogin = (e) => {
     setCredential('DemoUser');
     setPassword('demopassword')
     handleSubmit()
