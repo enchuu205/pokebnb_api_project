@@ -48,7 +48,7 @@ function ProfileButton({ user }) {
   return (
     <>
       <div className='user-container'>
-        {user ? (<div id='create-spot-button' onClick={() => navigate('api/spots/new')}>Create a New Spot</div>) : null}
+        {user ? (<div id='create-spot-button' onClick={() => navigate('/spots/new')}>Create a New Spot</div>) : null}
         <button className='user-button' onClick={toggleMenu}>
           <BsList className='bar-icon' />
           <i className="fas fa-user-circle" />
