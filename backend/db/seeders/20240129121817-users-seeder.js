@@ -39,6 +39,7 @@ module.exports = {
         firstName: 'Undel',
         lastName: 'Lickitung'
       },
+<<<<<<< Updated upstream
       // {
       //   email: 'amy@user.io',
       //   username: 'amy',
@@ -46,6 +47,15 @@ module.exports = {
       //   firstName: 'Amy',
       //   lastName: 'Litwick'
       // }
+=======
+      {
+        email: 'amy@user.io',
+        username: 'AsparagusSoju',
+        hashedPassword: bcrypt.hashSync('password4'),
+        firstName: 'Amy',
+        lastName: 'Litwick'
+      }
+>>>>>>> Stashed changes
     ], { validate: true });
   },
 
@@ -53,7 +63,7 @@ module.exports = {
     options.tableName = 'Users';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      email: { [Op.like]: ['%@%'] }
+      username: { [Op.in]: ['byeolrin', 'dennisbtw', 'iLeftyy', 'undel', 'AsparagusSoju'] }
     }, {});
   }
 };
