@@ -58,6 +58,14 @@ function SignupFormModal() {
     });
   };
 
+  // validation template
+  // { errors.firstName && <p>{errors.firstName}</p> }
+  // { errors.lastName && <p>{errors.lastName}</p> }
+  // { errors.email && <p>{errors.email}</p> }
+  // { errors.username && <p>{errors.username}</p> }
+  // { errors.password && <p>{errors.password}</p> }
+  // { errors.confirmPassword && <p>{errors.confirmPassword}</p> }
+
   return (
     <>
       <form onSubmit={handleSubmit} className='signup-container'>
@@ -122,7 +130,7 @@ function SignupFormModal() {
             placeholder='Confirm Password'
           />
         </label>
-        <button id='submit-button' disabled={validSignUp()} type="submit">Sign Up</button>
+        <button id='submit-button' disabled={validSignUp()} className={`${validSignUp() ? 'disable' : ''}`} type="submit">Sign Up</button>
       </form>
     </>
   );

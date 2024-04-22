@@ -102,7 +102,7 @@ export function CreateSpotForm() {
                     dispatch(addImageThunk(spot.id, imagesArr))
                     return spot
                 })
-                .then((spot) => navigate(`/api/spots/${spot.id}`))
+                .then((spot) => navigate(`/spots/${spot.id}`))
 
 
 
