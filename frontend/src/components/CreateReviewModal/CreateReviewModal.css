@@ -1,0 +1,52 @@
+#review-modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 300px;
+    padding: 20px 10px;
+}
+
+
+#review-text-area {
+    width: 300px;
+    height: 200px;
+    font-size: large;
+}
+
+#review-stars {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+#review-submit-button {
+    background-color: rgb(194, 62, 62);
+    color: white;
+    width: 200px;
+    height: 30px;
+    font-size: large;
+    border-radius: 7px;
+}
+
+
+#review-submit-button:hover {
+    cursor: pointer;
+}
+
+.review-stars:hover {
+    cursor: pointer;
+}
+
+.disable {
+    background-color: gray !important;
+    cursor: unset !important;
+}
+
+.filled {
+    color: black !important
+}
+
+.empty {
+    color: rgb(201, 199, 199);
+}

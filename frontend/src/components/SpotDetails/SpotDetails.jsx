@@ -53,7 +53,6 @@ function SpotDetails() {
                 </div>
             </div>
             <hr></hr>
-            <div className="reviews-overall"><AiFillStar /> {spotDetailsObj.avgStarRating && Number(spotDetailsObj.avgStarRating).toFixed(1) + ` · ` + spotDetailsObj.numReviews + ` review${spotDetailsObj.numReviews > 1 ? 's' : ''}` || 'New'}</div>
             <Reviews />
         </div>
     )
