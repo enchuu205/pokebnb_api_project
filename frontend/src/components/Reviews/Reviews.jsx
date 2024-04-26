@@ -33,7 +33,7 @@ function Reviews() {
     // console.log(currentUser, spotDetailsObj)
 
 
-    const reviewsObj = useSelector((state) => state.reviews)
+    const reviewsObj = useSelector((state) => state?.reviews)
     const reviews = Object.values(reviewsObj)
     console.log('reviews obj:', reviewsObj)
     console.log('reviews', reviews)
