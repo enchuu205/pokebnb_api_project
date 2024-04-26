@@ -34,7 +34,7 @@ function CreateReviewModal() {
         const review = { review: reviewText, stars: reviewStars }
         console.log(review, spotId)
         dispatch(createReviewThunk(review, spotId))
-            .then(loadReviewsThunk(spotId))
+            .then(() => dispatch(loadReviewsThunk(spotId)))
             .then(closeModal)
         // .catch(async (res) => {
         //     const data = await res.json();

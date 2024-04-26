@@ -38,10 +38,10 @@ function Reviews() {
     console.log('reviews obj:', reviewsObj)
     console.log('reviews', reviews)
 
-    const reviewsCreator = reviews.map((review, index) => {
+    const reviewsCreator = reviews?.map((review, index) => {
         return (
             <div key={index} className='review-container'>
-                <div className='review-name'>{review.User.firstName}</div>
+                <div className='review-name'>{review?.User?.firstName}</div>
                 <div className='review-date'>{reviewDateFormatter(review.createdAt)}</div>
                 {review.review}
             </div>
