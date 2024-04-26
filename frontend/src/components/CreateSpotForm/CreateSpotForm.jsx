@@ -11,11 +11,11 @@ import './CreateSpotForm.css'
 export function CreateSpotForm() {
     const { spotId } = useParams()
 
-    const { manage, setManage } = useContext(ManageContext)
+    const { manage } = useContext(ManageContext)
 
     let spotDetailsObj = []
+    spotDetailsObj = useSelector((state) => state.spots[spotId])
     if (manage) {
-        spotDetailsObj = useSelector((state) => state.spots[spotId])
         console.log(spotDetailsObj)
     }
 
@@ -123,7 +123,7 @@ export function CreateSpotForm() {
         }
     }
 
-    const updateSpotForm = (e) => {
+    const updateSpotForm = () => {
         const spot = {
             // ...spot,
             address: streetAddress,

@@ -13,13 +13,13 @@ function CreateReviewModal() {
     const [reviewText, setReviewText] = useState('')
     const [reviewStars, setReviewStars] = useState(0)
     const [activeReviewStars, setActiveReviewStars] = useState(0)
-    const [errors, setErrors] = useState({})
+    // const [errors, setErrors] = useState({})
 
     const { closeModal } = useModal()
 
     const dispatch = useDispatch()
     // const navigate = useNavigate()
-    const currentUser = useSelector((state) => state.session.user)
+    // const currentUser = useSelector((state) => state.session.user)
     const spotDetailsObj = useSelector((state) => state.spots.spotDetails)
     // console.log(currentUser, spotDetailsObj)
 

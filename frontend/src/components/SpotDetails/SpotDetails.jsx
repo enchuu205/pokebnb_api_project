@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { loadSpotDetailsThunk } from "../../store/spots"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useContext } from "react"
+import { useEffect } from "react"
 
 import Reviews from "../Reviews"
 
