@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { loadSpotDetailsThunk } from "../../store/spots"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useContext } from "react"
 
 import Reviews from "../Reviews"
 
@@ -15,6 +15,7 @@ function previewImageChecker(spotImage) {
 }
 
 function SpotDetails() {
+
     let { spotId } = useParams()
     const dispatch = useDispatch()
     const spotDetailsObj = useSelector((state) => state.spots.spotDetails)

@@ -1,20 +1,34 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { createSpotThunk, addImageThunk } from "../../store/spots"
+import { useDispatch, useSelector } from 'react-redux'
+import { createSpotThunk, addImageThunk, updateSpotThunk } from "../../store/spots"
+import { useParams } from "react-router-dom"
+
+import { ManageContext } from "../../context/Manage"
+
 import './CreateSpotForm.css'
 
 export function CreateSpotForm() {
-    const [country, setCountry] = useState('')
-    const [streetAddress, setStreetAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [latitude, setLatitude] = useState('')
-    const [longitude, setLongitude] = useState('')
-    const [description, setDescription] = useState('')
-    const [title, setTitle] = useState('')
-    const [price, setPrice] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
+    const { spotId } = useParams()
+
+    const { manage, setManage } = useContext(ManageContext)
+
+    let spotDetailsObj = []
+    if (manage) {
+        spotDetailsObj = useSelector((state) => state.spots[spotId])
+        console.log(spotDetailsObj)
+    }
+
+    const [country, setCountry] = useState(manage ? spotDetailsObj.country : '')
+    const [streetAddress, setStreetAddress] = useState(manage ? spotDetailsObj.address : '')
+    const [city, setCity] = useState(manage ? spotDetailsObj.city : '')
+    const [state, setState] = useState(manage ? spotDetailsObj.state : '')
+    const [latitude, setLatitude] = useState(manage ? spotDetailsObj.lat : '')
+    const [longitude, setLongitude] = useState(manage ? spotDetailsObj.lng : '')
+    const [description, setDescription] = useState(manage ? spotDetailsObj.description : '')
+    const [title, setTitle] = useState(manage ? spotDetailsObj.name : '')
+    const [price, setPrice] = useState(manage ? spotDetailsObj.price : '')
+    const [previewImage, setPreviewImage] = useState(manage ? spotDetailsObj.previewImage : '')
     const [image2, setImage2] = useState('')
     const [image3, setImage3] = useState('')
     const [image4, setImage4] = useState('')
@@ -109,9 +123,44 @@ export function CreateSpotForm() {
         }
     }
 
+    const updateSpotForm = (e) => {
+        const spot = {
+            // ...spot,
+            address: streetAddress,
+            city,
+            state,
+            country,
+            lat: latitude,
+            lng: longitude,
+            name: title,
+            description,
+            price: Number(price)
+        }
+
+        let imagesArr = []
+        previewImage ? imagesArr.push(previewImage) : null
+        image2 ? imagesArr.push(image2) : null
+        image3 ? imagesArr.push(image3) : null
+        image4 ? imagesArr.push(image4) : null
+        image5 ? imagesArr.push(image5) : null
+
+        if (Object.keys(validationErrors).length === 0) {
+            // dispatch the create spot form, and then add the images with the new spot object
+            dispatch(updateSpotThunk(spot))
+                .then((spot) => {
+                    dispatch(addImageThunk(spot.id, imagesArr))
+                    return spot
+                })
+                .then((spot) => navigate(`/spots/${spot.id}`))
+
+
+
+        }
+    }
+
     return (
         <div className="create-spot-form-container">
-            <h1>Create a new Spot</h1>
+            <h1>{manage ? 'Update your' : 'Create a new'} Spot</h1>
             <label>Where&apos;s your place located?</label>
             <div>Guests will only get your exact address once they booked a reservation.</div>
             <div className="location-container">
@@ -266,8 +315,8 @@ export function CreateSpotForm() {
             <hr />
             <button
                 className="create-spot-button"
-                onClick={submitSpotForm}
-            >Create Spot</button>
+                onClick={manage ? updateSpotForm : submitSpotForm}
+            >{manage ? 'Update' : 'Create'} Spot</button>
         </div>
     )
 

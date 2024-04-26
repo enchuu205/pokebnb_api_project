@@ -10,6 +10,7 @@
   padding: 5px 10px 5px 10px
 }
 
+
 .profile-dropdown>div {
   padding: 2px
 }
@@ -38,7 +39,7 @@
 
 .logo-text {
   font-size: 30px;
-  color: red;
+  color: rgb(194, 62, 62);
   text-decoration: none;
   font-weight: bolder;
   padding-left: 5px;

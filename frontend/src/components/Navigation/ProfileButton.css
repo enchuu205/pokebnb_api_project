@@ -20,6 +20,11 @@
     margin-top: 5px;
 }
 
+.logout-button:hover {
+    background-color: rgb(194, 62, 62);
+    cursor: pointer;
+}
+
 .user-container {
     display: flex;
     align-items: center;
@@ -37,9 +42,15 @@
 
 #create-spot-button:hover {
     cursor: pointer;
+    color: rgb(194, 62, 62);
 }
 
 .button-container {
     display: flex;
     justify-content: center;
+}
+
+.manage-text:hover {
+    cursor: pointer;
+    color: rgb(194, 62, 62);
 }

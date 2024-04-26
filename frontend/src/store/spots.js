@@ -4,6 +4,7 @@ const LOAD_SPOTS = '/spots/LOAD_SPOTS'
 const LOAD_SPOT_DETAILS = '/spots/LOAD_SPOT_DETAILS'
 const CREATE_SPOT = '/spots/CREATE_SPOT'
 const ADD_IMAGE = '/spots/ADD_IMAGE'
+const UPDATE_SPOT = '/spots/UPDATE_SPOT'
 
 // action creator
 export const loadSpots = (spots) => ({
@@ -18,6 +19,11 @@ export const loadSpotDetails = (spotDetails) => ({
 
 export const createSpot = (spot) => ({
     type: CREATE_SPOT,
+    spot
+})
+
+export const updateSpot = (spot) => ({
+    type: UPDATE_SPOT,
     spot
 })
 
@@ -68,6 +74,22 @@ export const createSpotThunk = (spot) => async (dispatch) => {
 
 }
 
+export const updateSpotThunk = (spot) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spot.id}`,
+        {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(spot)
+        }
+    )
+
+    if (response.ok) {
+        const spot = await response.json()
+        dispatch(updateSpot(spot))
+        return spot
+    }
+}
+
 export const addImageThunk = (spotId, images) => async (dispatch) => {
     let imageArr = []
     for (let i = 0; i < images.length; i++) {
@@ -107,6 +129,8 @@ const spotsReducer = (state = {}, action) => {
             // console.log('this is the action!!!!,', action)
             return { ...state, 'spotDetails': action.spotDetails }
         case CREATE_SPOT:
+            return { ...state, [action.spot.id]: action.spot }
+        case UPDATE_SPOT:
             return { ...state, [action.spot.id]: action.spot }
         default:
             return state

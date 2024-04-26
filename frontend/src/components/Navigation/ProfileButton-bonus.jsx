@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
@@ -6,6 +6,8 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { useNavigate } from 'react-router-dom';
 import './ProfileButton.css'
+
+import { ManageContext } from '../../context/Manage';
 
 import { BsList } from "react-icons/bs";
 
@@ -45,6 +47,8 @@ function ProfileButton({ user }) {
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
+  const { manage, setManage } = useContext(ManageContext)
+
   return (
     <>
       <div className='user-container'>
@@ -60,8 +64,8 @@ function ProfileButton({ user }) {
             <div>Hello, {user.firstName}</div>
             <div>{user.email}</div>
             <hr />
-            <div>Manage Spots</div>
-            <div>Manage Reviews</div>
+            <div onClick={() => setManage(!manage)} className='manage-text'>Manage Spots</div>
+            <div onClick={() => setManage(!manage)} className='manage-text'>Manage Reviews</div>
             <div className='button-container'>
               <button className='logout-button' onClick={logout}>Log Out</button>
             </div>

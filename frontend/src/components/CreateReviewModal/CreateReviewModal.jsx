@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { AiFillStar } from "react-icons/ai"
 
-import { createReviewThunk } from '../../store/reviews'
+import { createReviewThunk, loadReviewsThunk } from '../../store/reviews'
+import { useModal } from '../../context/Modal'
 
 import './CreateReviewModal.css'
 
@@ -11,6 +13,15 @@ function CreateReviewModal() {
     const [reviewText, setReviewText] = useState('')
     const [reviewStars, setReviewStars] = useState(0)
     const [activeReviewStars, setActiveReviewStars] = useState(0)
+    const [errors, setErrors] = useState({})
+
+    const { closeModal } = useModal()
+
+    const dispatch = useDispatch()
+    // const navigate = useNavigate()
+    const currentUser = useSelector((state) => state.session.user)
+    const spotDetailsObj = useSelector((state) => state.spots.spotDetails)
+    // console.log(currentUser, spotDetailsObj)
 
     function validReview() {
         if (reviewText.length < 10 || reviewStars === 0) {
@@ -19,15 +30,24 @@ function CreateReviewModal() {
         return false
     }
 
-    function submitReview() {
+    function submitReview(spotId) {
         const review = { review: reviewText, stars: reviewStars }
-        // dispatchEvent(createReviewThunk(review))
-
+        console.log(review, spotId)
+        dispatch(createReviewThunk(review, spotId))
+            .then(loadReviewsThunk(spotId))
+            .then(closeModal)
+        // .catch(async (res) => {
+        //     const data = await res.json();
+        //     if (data?.errors) {
+        //         setErrors(data.errors);
+        //     }
+        // });
     }
 
     return (
         <div id='review-modal-container'>
             <h2 id='review-header'>How was your stay?</h2>
+            {/* {errors && console.log(errors)} */}
             <textarea
                 id='review-text-area'
                 placeholder="Leave your review here..."
@@ -77,7 +97,7 @@ function CreateReviewModal() {
             <button
                 id='review-submit-button'
                 disabled={validReview()} className={`${validReview() ? 'disable' : ''}`}
-                onClick={submitReview()}
+                onClick={() => submitReview(spotDetailsObj.id)}
             >
                 Submit Your Review
             </button>

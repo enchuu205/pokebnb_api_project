@@ -60,7 +60,7 @@ module.exports = {
         price: 500.00
       },
       {
-        ownerId: 4,
+        ownerId: 6,
         address: '591 Garchomp Way',
         city: 'Undella Town',
         state: 'Sinnoh',

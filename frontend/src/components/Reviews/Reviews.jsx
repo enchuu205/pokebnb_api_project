@@ -30,12 +30,13 @@ function Reviews() {
     const currentUser = useSelector((state) => state.session.user)
     const spotDetailsObj = useSelector((state) => state.spots.spotDetails)
 
-    console.log(currentUser, spotDetailsObj)
+    // console.log(currentUser, spotDetailsObj)
 
 
     const reviewsObj = useSelector((state) => state.reviews)
     const reviews = Object.values(reviewsObj)
-    // console.log('reviews obj:', reviewsObj)
+    console.log('reviews obj:', reviewsObj)
+    console.log('reviews', reviews)
 
     const reviewsCreator = reviews.map((review, index) => {
         return (
