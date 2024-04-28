@@ -15,11 +15,6 @@ export function CreateSpotForm() {
     const { manage } = useContext(ManageContext)
 
     let spotDetailsObj = []
-<<<<<<< HEAD
-    spotDetailsObj = useSelector((state) => state.spots[spotId])
-    if (manage) {
-        console.log(spotDetailsObj)
-=======
     let spotImagesNonPreview = []
     let previousImageArr = []
     let spotDetailsObjManage = useSelector((state) => state.spots[spotId])
@@ -31,7 +26,6 @@ export function CreateSpotForm() {
         // console.log(spotImagesNonPreview)
         previousImageArr = spotDetailsObj.SpotImages
         console.log(previousImageArr)
->>>>>>> reviews-route
     }
 
     const [country, setCountry] = useState(manage ? spotDetailsObj.country : '')
@@ -138,9 +132,6 @@ export function CreateSpotForm() {
         }
     }
 
-<<<<<<< HEAD
-    const updateSpotForm = () => {
-=======
     function updateSpotReload() {
         navigate(`/spots/${spotDetailsObj.id}`)
         window.location.reload()
@@ -153,7 +144,6 @@ export function CreateSpotForm() {
 
         // console.log(spotDetailsObj)
 
->>>>>>> reviews-route
         const spot = {
             // ...spot,
             id: spotDetailsObj.id,

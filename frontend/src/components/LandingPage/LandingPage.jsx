@@ -18,7 +18,7 @@ function LandingPage() {
     // console.log(spots)
 
     // Manage spots tester
-    const { manage } = useContext(ManageContext)
+    const { manage, setManage } = useContext(ManageContext)
 
     const currentUser = useSelector((state) => state.session.user)
 
