@@ -19,9 +19,22 @@ input {
     color: red;
 }
 
+#city-state-container {
+    display: grid;
+    grid-template-columns: 290px 200px 10px;
+}
+
+#city {
+    width: 270px
+}
+
+#state {
+    width: 200px
+}
+
 #lat-long-container {
     display: grid;
-    grid-template-columns: 250px 250px;
+    grid-template-columns: 250px 250px 10px;
 }
 
 #latitude {
@@ -56,6 +69,7 @@ input {
     display: flex;
     justify-content: center;
     margin: auto;
+    margin-top: 15px;
 }
 
 .create-spot-button:hover {

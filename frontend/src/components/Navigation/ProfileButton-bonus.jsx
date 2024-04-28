@@ -47,12 +47,27 @@ function ProfileButton({ user }) {
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
-  const { manage, setManage } = useContext(ManageContext)
+  const { setManage } = useContext(ManageContext)
+
+  function createSpotButton() {
+    setManage(false)
+    navigate('/spots/new')
+  }
+
+  function manageSpots() {
+    setManage(true)
+    navigate('/')
+  }
+
+  function manageReviews() {
+    setManage(true)
+    navigate('/')
+  }
 
   return (
     <>
       <div className='user-container'>
-        {user ? (<div id='create-spot-button' onClick={() => navigate('/spots/new')}>Create a New Spot</div>) : null}
+        {user ? (<div id='create-spot-button' onClick={() => createSpotButton()}>Create a New Spot</div>) : null}
         <button className='user-button' onClick={toggleMenu}>
           <BsList className='bar-icon' />
           <i className="fas fa-user-circle" />
@@ -64,8 +79,8 @@ function ProfileButton({ user }) {
             <div>Hello, {user.firstName}</div>
             <div>{user.email}</div>
             <hr />
-            <div onClick={() => setManage(!manage)} className='manage-text'>Manage Spots</div>
-            <div onClick={() => setManage(!manage)} className='manage-text'>Manage Reviews</div>
+            <div onClick={() => manageSpots()} className='manage-text'>Manage Spots</div>
+            <div onClick={() => manageReviews()} className='manage-text'>Manage Reviews</div>
             <div className='button-container'>
               <button className='logout-button' onClick={logout}>Log Out</button>
             </div>

@@ -32,21 +32,28 @@ function Reviews() {
 
     // console.log(currentUser, spotDetailsObj)
 
+    const reviewsObj = useSelector((state) => state?.reviews)
+    let reviews = Object.values(reviewsObj)
 
-    const reviewsObj = useSelector((state) => state.reviews)
-    const reviews = Object.values(reviewsObj)
-    console.log('reviews obj:', reviewsObj)
-    console.log('reviews', reviews)
+    // console.log('reviewfinder', reviews.find((review) => review.User.id === currentUser.id))
 
-    const reviewsCreator = reviews.map((review, index) => {
+    // console.log('reviews obj:', reviewsObj)
+    // console.log('reviews', reviews)
+
+    const reviewsCreator = reviews.reverse().map((review, index) => {
         return (
             <div key={index} className='review-container'>
-                <div className='review-name'>{review.User.firstName}</div>
+                <div className='review-name'>{review?.User?.firstName}</div>
                 <div className='review-date'>{reviewDateFormatter(review.createdAt)}</div>
                 {review.review}
             </div>
         )
     })
+
+    // function createdReview() {
+    //     let createdReview = reviews.find((review) => review.User.id === currentUser.id)
+    //     created
+    // }
 
     useEffect(() => {
         dispatch(loadReviewsThunk(spotId))
@@ -57,7 +64,8 @@ function Reviews() {
     return (
         <>
             <div className="reviews-overall"><AiFillStar /> {spotDetailsObj.avgStarRating && Number(spotDetailsObj.avgStarRating).toFixed(1) + ` · ` + spotDetailsObj.numReviews + ` review${spotDetailsObj.numReviews > 1 ? 's' : ''}` || 'New'}</div>
-            {currentUser && currentUser.id != spotDetailsObj.Owner.id &&
+            {currentUser && currentUser.id != spotDetailsObj.Owner.id && reviews.length < 1 && <div>Be the first to post a review!</div>}
+            {currentUser && reviews.find((review) => review.User.id === currentUser.id) ? false : true && currentUser.id != spotDetailsObj.Owner.id &&
                 <button >
                     <OpenModalMenuItem
                         itemText='Post your Review'

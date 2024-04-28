@@ -459,6 +459,14 @@ router.get('/', validateQuery, async (req, res) => {
             }
         })
         spotImgPreview ? spots[i].setDataValue('previewImage', spotImgPreview.url) : spots[i].setDataValue('previewImage', null)
+
+        let spotImages = await SpotImage.findAll({
+            where: {
+                spotId: spots[i].id,
+            }
+        })
+
+        spotImages ? spots[i].setDataValue('SpotImages', spotImages) : spots[i].setDataValue('SpotImages', null)
     }
 
     return res.json({

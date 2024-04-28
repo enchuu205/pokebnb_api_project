@@ -47,6 +47,7 @@ export const createReviewThunk = (review, spotId) => async (dispatch) => {
 // reviews reducer
 const reviewsReducer = (state = {}, action) => {
     const allReviews = {}
+    let newState = {}
     switch (action.type) {
         case LOAD_REVIEWS:
             action.reviews.Reviews.forEach(review => {
@@ -56,7 +57,7 @@ const reviewsReducer = (state = {}, action) => {
         case CREATE_REVIEW:
             // let review = action.review
 
-            let newState = { ...state, [action.review.id]: action.review }
+            newState = { ...state, [action.review.id]: action.review }
             return newState
         default:
             return state
