@@ -1,7 +1,8 @@
 import { useEffect, useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { createSpotThunk, addImageThunk, updateSpotThunk } from "../../store/spots"
+import { createSpotThunk, updateSpotThunk } from "../../store/spots"
+import { addImageThunk, deleteImageThunk } from "../../store/images"
 import { useParams } from "react-router-dom"
 
 import { ManageContext } from "../../context/Manage"
@@ -14,9 +15,23 @@ export function CreateSpotForm() {
     const { manage } = useContext(ManageContext)
 
     let spotDetailsObj = []
+<<<<<<< HEAD
     spotDetailsObj = useSelector((state) => state.spots[spotId])
     if (manage) {
         console.log(spotDetailsObj)
+=======
+    let spotImagesNonPreview = []
+    let previousImageArr = []
+    let spotDetailsObjManage = useSelector((state) => state.spots[spotId])
+
+    if (manage) {
+        spotDetailsObj = spotDetailsObjManage
+        // console.log(spotDetailsObj)
+        spotImagesNonPreview = spotDetailsObj.SpotImages?.filter((image) => image.preview != true)
+        // console.log(spotImagesNonPreview)
+        previousImageArr = spotDetailsObj.SpotImages
+        console.log(previousImageArr)
+>>>>>>> reviews-route
     }
 
     const [country, setCountry] = useState(manage ? spotDetailsObj.country : '')
@@ -29,10 +44,10 @@ export function CreateSpotForm() {
     const [title, setTitle] = useState(manage ? spotDetailsObj.name : '')
     const [price, setPrice] = useState(manage ? spotDetailsObj.price : '')
     const [previewImage, setPreviewImage] = useState(manage ? spotDetailsObj.previewImage : '')
-    const [image2, setImage2] = useState('')
-    const [image3, setImage3] = useState('')
-    const [image4, setImage4] = useState('')
-    const [image5, setImage5] = useState('')
+    const [image2, setImage2] = useState(manage && spotImagesNonPreview?.length > 0 ? spotImagesNonPreview[0].url : '')
+    const [image3, setImage3] = useState(manage && spotImagesNonPreview?.length > 1 ? spotImagesNonPreview[1].url : '')
+    const [image4, setImage4] = useState(manage && spotImagesNonPreview?.length > 2 ? spotImagesNonPreview[2].url : '')
+    const [image5, setImage5] = useState(manage && spotImagesNonPreview?.length > 3 ? spotImagesNonPreview[3].url : '')
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -123,19 +138,36 @@ export function CreateSpotForm() {
         }
     }
 
+<<<<<<< HEAD
     const updateSpotForm = () => {
+=======
+    function updateSpotReload() {
+        navigate(`/spots/${spotDetailsObj.id}`)
+        window.location.reload()
+    }
+
+    const updateSpotForm = (e) => {
+
+        e.preventDefault();
+        setSubmit(true)
+
+        // console.log(spotDetailsObj)
+
+>>>>>>> reviews-route
         const spot = {
             // ...spot,
+            id: spotDetailsObj.id,
             address: streetAddress,
             city,
             state,
             country,
-            lat: latitude,
-            lng: longitude,
+            lat: Number(latitude),
+            lng: Number(longitude),
             name: title,
             description,
             price: Number(price)
         }
+        // console.log('this is the spot', spot)
 
         let imagesArr = []
         previewImage ? imagesArr.push(previewImage) : null
@@ -144,18 +176,40 @@ export function CreateSpotForm() {
         image4 ? imagesArr.push(image4) : null
         image5 ? imagesArr.push(image5) : null
 
+        // console.log(imagesArr, 'images array')
+
         if (Object.keys(validationErrors).length === 0) {
             // dispatch the create spot form, and then add the images with the new spot object
             dispatch(updateSpotThunk(spot))
                 .then((spot) => {
-                    dispatch(addImageThunk(spot.id, imagesArr))
+                    dispatch(deleteImageThunk(previousImageArr))
                     return spot
                 })
-                .then((spot) => navigate(`/spots/${spot.id}`))
+                .then((spot) => {
+                    // console.log('thunk return', spot)
+                    dispatch(addImageThunk(spotDetailsObj.id, imagesArr))
+                    return spot
+                })
+                .then(() => updateSpotReload())
 
 
 
         }
+    }
+
+    function createExampleSpot() {
+        setCountry('Unova')
+        setStreetAddress('278 Shuckle Way')
+        setCity('Black City')
+        setState('Gen 5')
+        setLatitude(11.11111)
+        setLongitude(-11.11111)
+        setDescription('Luxurious modern home located near the Pokemon Center with sleek interior stainless steel design.')
+        setTitle('Steel Haven Retreat: Luxe Modern Oasis')
+        setPrice(600)
+        setPreviewImage('https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925132/black-city/f9ebd9f492ykd1jtovde.png')
+        setImage2('https://res.cloudinary.com/dztk9g8ji/image/upload/v1714291259/black-city/c5f1da94-c16b-4d09-a4d6-956dae059715.png')
+        setImage3('https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925132/black-city/opthemblnwrq5u2gmrrk.png')
     }
 
     return (
@@ -182,24 +236,33 @@ export function CreateSpotForm() {
                     required
                     placeholder="Address"
                 />
-                <span>City </span>
-                {submit && validationErrors.city && <span className="validation-text">{validationErrors.city}</span>}
-                <input
-                    type='text'
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required
-                    placeholder="City"
-                />
-                <span>State </span>
-                {submit && validationErrors.state && <span className="validation-text">{validationErrors.state}</span>}
-                <input
-                    type='text'
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    required
-                    placeholder="STATE"
-                />
+                <div id='city-state-container'>
+                    <div>
+                        <span>City </span>
+                        {submit && validationErrors.city && <span className="validation-text">{validationErrors.city}</span>}
+                        <input
+                            id='city'
+                            type='text'
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            required
+                            placeholder="City"
+                        />
+                        <span>{'  ,'}</span>
+                    </div>
+                    <div>
+                        <span>State </span>
+                        {submit && validationErrors.state && <span className="validation-text">{validationErrors.state}</span>}
+                        <input
+                            id='state'
+                            type='text'
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
+                            required
+                            placeholder="STATE"
+                        />
+                    </div>
+                </div>
                 <div id="lat-long-container">
                     <div>
                         <span>Latitude </span>
@@ -211,6 +274,7 @@ export function CreateSpotForm() {
                             onChange={(e) => setLatitude(e.target.value)}
                             placeholder="Latitude"
                         />
+                        <span>{'  ,'}</span>
                     </div>
                     <div>
                         <span>Longitude </span>
@@ -317,7 +381,9 @@ export function CreateSpotForm() {
                 className="create-spot-button"
                 onClick={manage ? updateSpotForm : submitSpotForm}
             >{manage ? 'Update' : 'Create'} Spot</button>
+            <button className="create-spot-button" onClick={(e) => createExampleSpot(e)}>Example Spot</button>
         </div>
+
     )
 
 }

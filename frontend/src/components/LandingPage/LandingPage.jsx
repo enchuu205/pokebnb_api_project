@@ -15,7 +15,7 @@ function LandingPage() {
 
     const spotsObj = useSelector((state) => state.spots)
     let spots = Object.values(spotsObj)
-    console.log(spots)
+    // console.log(spots)
 
     // Manage spots tester
     const { manage } = useContext(ManageContext)
@@ -65,8 +65,9 @@ function LandingPage() {
     return (
         <>
             {manage && <h2>Manage Your Spots</h2>}
-            {manage && <button>Create a New Spot</button>}
+            {manage && spots.length === 0 && <button>Create a New Spot</button>}
             <div className="all-spots-container">{spotBlockCreator}</div>
+            {manage && <button onClick={() => setManage(false)}>Return to all spots</button>}
         </>
     )
 }

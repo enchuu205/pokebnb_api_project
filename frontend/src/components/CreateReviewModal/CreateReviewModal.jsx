@@ -36,6 +36,7 @@ function CreateReviewModal() {
         dispatch(createReviewThunk(review, spotId))
             .then(() => dispatch(loadReviewsThunk(spotId)))
             .then(closeModal)
+            .then(window.location.reload())
         // .catch(async (res) => {
         //     const data = await res.json();
         //     if (data?.errors) {

@@ -20,6 +20,8 @@ function SpotDetails() {
     const dispatch = useDispatch()
     const spotDetailsObj = useSelector((state) => state.spots.spotDetails)
 
+    console.log('spotDetailsObj', spotDetailsObj)
+
     useEffect(() => {
         dispatch(loadSpotDetailsThunk(spotId))
     }, [dispatch, spotId])
