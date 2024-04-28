@@ -2,7 +2,8 @@ import { useEffect, useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createSpotThunk, updateSpotThunk } from "../../store/spots"
-import { addImageThunk, deleteImageThunk } from "../../store/images"
+import { addImageThunk } from "../../store/images"
+// import { deleteImageThunk } from "../../store/images"
 import { useParams } from "react-router-dom"
 
 import { ManageContext } from "../../context/Manage"
@@ -171,15 +172,15 @@ export function CreateSpotForm() {
         if (Object.keys(validationErrors).length === 0) {
             // dispatch the create spot form, and then add the images with the new spot object
             dispatch(updateSpotThunk(spot))
-                .then((spot) => {
-                    dispatch(deleteImageThunk(previousImageArr))
-                    return spot
-                })
-                .then((spot) => {
-                    // console.log('thunk return', spot)
-                    dispatch(addImageThunk(spotDetailsObj.id, imagesArr))
-                    return spot
-                })
+                // .then((spot) => {
+                //     dispatch(deleteImageThunk(previousImageArr))
+                //     return spot
+                // })
+                // .then((spot) => {
+                //     // console.log('thunk return', spot)
+                //     dispatch(addImageThunk(spotDetailsObj.id, imagesArr))
+                //     return spot
+                // })
                 .then(() => updateSpotReload())
 
 
@@ -208,8 +209,7 @@ export function CreateSpotForm() {
             <label>Where&apos;s your place located?</label>
             <div>Guests will only get your exact address once they booked a reservation.</div>
             <div className="location-container">
-                <span>Country </span>
-                {submit && validationErrors.country && <span className="validation-text">{validationErrors.country}</span>}
+                <div>Country </div>
                 <input
                     type='text'
                     value={country}
@@ -217,8 +217,8 @@ export function CreateSpotForm() {
                     required
                     placeholder="Country"
                 />
-                <span>Street Address </span>
-                {submit && validationErrors.streetAddress && <span className="validation-text">{validationErrors.streetAddress}</span>}
+                {submit && validationErrors.country && <span className="validation-text">{validationErrors.country}</span>}
+                <div>Street Address </div>
                 <input
                     type='text'
                     value={streetAddress}
@@ -226,10 +226,10 @@ export function CreateSpotForm() {
                     required
                     placeholder="Address"
                 />
+                {submit && validationErrors.streetAddress && <span className="validation-text">{validationErrors.streetAddress}</span>}
                 <div id='city-state-container'>
                     <div>
                         <span>City </span>
-                        {submit && validationErrors.city && <span className="validation-text">{validationErrors.city}</span>}
                         <input
                             id='city'
                             type='text'
@@ -238,11 +238,11 @@ export function CreateSpotForm() {
                             required
                             placeholder="City"
                         />
-                        <span>{'  ,'}</span>
+                        {submit && validationErrors.city && <span className="validation-text">{validationErrors.city}</span>}
                     </div>
+                    {/* <span>{', '}</span> */}
                     <div>
                         <span>State </span>
-                        {submit && validationErrors.state && <span className="validation-text">{validationErrors.state}</span>}
                         <input
                             id='state'
                             type='text'
@@ -251,12 +251,12 @@ export function CreateSpotForm() {
                             required
                             placeholder="STATE"
                         />
+                        {submit && validationErrors.state && <span className="validation-text">{validationErrors.state}</span>}
                     </div>
                 </div>
                 <div id="lat-long-container">
                     <div>
                         <span>Latitude </span>
-                        {submit && validationErrors.latitude && <span className="validation-text">{validationErrors.latitude}</span>}
                         <input
                             id='latitude'
                             type='text'
@@ -264,11 +264,11 @@ export function CreateSpotForm() {
                             onChange={(e) => setLatitude(e.target.value)}
                             placeholder="Latitude"
                         />
-                        <span>{'  ,'}</span>
+                        {submit && validationErrors.latitude && <span className="validation-text">{validationErrors.latitude}</span>}
                     </div>
+                    {/* <span>{'  ,'}</span> */}
                     <div>
                         <span>Longitude </span>
-                        {submit && validationErrors.longitude && <span className="validation-text">{validationErrors.longitude}</span>}
                         <input
                             id='longitude'
                             type='text'
@@ -276,6 +276,7 @@ export function CreateSpotForm() {
                             onChange={(e) => setLongitude(e.target.value)}
                             placeholder="Longitude"
                         />
+                        {submit && validationErrors.longitude && <span className="validation-text">{validationErrors.longitude}</span>}
                     </div>
                 </div>
             </div>
@@ -370,7 +371,7 @@ export function CreateSpotForm() {
             <button
                 className="create-spot-button"
                 onClick={manage ? updateSpotForm : submitSpotForm}
-            >{manage ? 'Update' : 'Create'} Spot</button>
+            >{manage ? 'Update Your ' : 'Create'} Spot</button>
             <button className="create-spot-button" onClick={(e) => createExampleSpot(e)}>Example Spot</button>
         </div>
 

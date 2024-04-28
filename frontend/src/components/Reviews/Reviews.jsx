@@ -65,7 +65,7 @@ function Reviews() {
         <>
             <div className="reviews-overall"><AiFillStar /> {spotDetailsObj.avgStarRating && Number(spotDetailsObj.avgStarRating).toFixed(1) + ` · ` + spotDetailsObj.numReviews + ` review${spotDetailsObj.numReviews > 1 ? 's' : ''}` || 'New'}</div>
             {currentUser && currentUser.id != spotDetailsObj.Owner.id && reviews.length < 1 && <div>Be the first to post a review!</div>}
-            {currentUser && reviews.find((review) => review.User.id === currentUser.id) ? false : true && currentUser.id != spotDetailsObj.Owner.id &&
+            {currentUser && reviews.find((review) => review.User.id === currentUser.id) ? false : true && currentUser?.id != spotDetailsObj.Owner.id &&
                 <button >
                     <OpenModalMenuItem
                         itemText='Post your Review'

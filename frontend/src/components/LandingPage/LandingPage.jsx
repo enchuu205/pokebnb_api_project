@@ -30,6 +30,11 @@ function LandingPage() {
         navigate(`/spots/${spot.id}`)
     }
 
+    function createSpotButton() {
+        setManage(false)
+        navigate('/spots/new')
+    }
+
     useEffect(() => {
         dispatch(loadSpotsThunk())
     }, [dispatch])
@@ -64,8 +69,8 @@ function LandingPage() {
 
     return (
         <>
-            {manage && <h2>Manage Your Spots</h2>}
-            {manage && spots.length === 0 && <button>Create a New Spot</button>}
+            {manage && <h2>Manage Spots</h2>}
+            {manage && spots.length === 0 && <button onClick={() => createSpotButton()}>Create a New Spot</button>}
             <div className="all-spots-container">{spotBlockCreator}</div>
             {manage && <button onClick={() => setManage(false)}>Return to all spots</button>}
         </>
