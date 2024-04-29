@@ -7,6 +7,21 @@
     margin: 40px 50px;
 }
 
+.update-button,
+.delete-button {
+    background-color: gray;
+    color: white;
+    width: 75px;
+}
+
+.delete-button {
+    margin-left: 10px;
+}
+
+.update-button:hover,
+.delete-button:hover {
+    background-color: rgb(194, 62, 62);
+}
 
 .spot-container {
     /* border: solid black; */
@@ -56,4 +71,13 @@
 #spot-tooltip {
     font-size: large;
     width: 350px
+}
+
+.create-spot-button-manage {
+    background-color: gray;
+    color: white;
+}
+
+.create-spot-button-manage:hover {
+    background-color: rgb(194, 62, 62);
 }

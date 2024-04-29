@@ -127,15 +127,12 @@ export function CreateSpotForm() {
                     return spot
                 })
                 .then((spot) => navigate(`/spots/${spot.id}`))
-
-
-
         }
     }
 
     function updateSpotReload() {
         navigate(`/spots/${spotDetailsObj.id}`)
-        window.location.reload()
+        // window.location.reload()
     }
 
     const updateSpotForm = (e) => {
@@ -198,9 +195,10 @@ export function CreateSpotForm() {
         setDescription('Luxurious modern home located near the Pokemon Center with sleek interior stainless steel design.')
         setTitle('Steel Haven Retreat: Luxe Modern Oasis')
         setPrice(600)
-        setPreviewImage('https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925132/black-city/f9ebd9f492ykd1jtovde.png')
-        setImage2('https://res.cloudinary.com/dztk9g8ji/image/upload/v1714291259/black-city/c5f1da94-c16b-4d09-a4d6-956dae059715.png')
-        setImage3('https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925132/black-city/opthemblnwrq5u2gmrrk.png')
+        setPreviewImage('https://res.cloudinary.com/dztk9g8ji/image/upload/v1714291259/black-city/c5f1da94-c16b-4d09-a4d6-956dae059715.png')
+        setImage2('https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925131/black-city/yhcmbt3vahcorbflsn4h.png')
+        setImage3('https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925131/black-city/cw5xx2oxuoeibcs5g4bn.png')
+        setImage4('https://res.cloudinary.com/dztk9g8ji/image/upload/v1710925132/black-city/opthemblnwrq5u2gmrrk.png')
     }
 
     return (
@@ -249,7 +247,7 @@ export function CreateSpotForm() {
                             value={state}
                             onChange={(e) => setState(e.target.value)}
                             required
-                            placeholder="STATE"
+                            placeholder="State"
                         />
                         {submit && validationErrors.state && <span className="validation-text">{validationErrors.state}</span>}
                     </div>

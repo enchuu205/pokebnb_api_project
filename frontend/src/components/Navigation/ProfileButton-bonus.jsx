@@ -40,6 +40,7 @@ function ProfileButton({ user }) {
 
   const logout = (e) => {
     e.preventDefault();
+    setManage(false)
     dispatch(sessionActions.logout());
     closeMenu();
     navigate('/')
@@ -59,10 +60,10 @@ function ProfileButton({ user }) {
     navigate('/')
   }
 
-  function manageReviews() {
-    setManage(true)
-    navigate('/')
-  }
+  // function manageReviews() {
+  //   setManage(true)
+  //   navigate('/')
+  // }
 
   return (
     <>
@@ -80,7 +81,7 @@ function ProfileButton({ user }) {
             <div>{user.email}</div>
             <hr />
             <div onClick={() => manageSpots()} className='manage-text'>Manage Spots</div>
-            <div onClick={() => manageReviews()} className='manage-text'>Manage Reviews</div>
+            <div onClick={() => alert('Feature Coming Soon...')} className='manage-text'>Manage Reviews</div>
             <div className='button-container'>
               <button className='logout-button' onClick={logout}>Log Out</button>
             </div>

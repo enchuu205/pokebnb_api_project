@@ -63,7 +63,7 @@ input {
 }
 
 .create-spot-button {
-    background-color: red;
+    background-color: rgb(194, 62, 62);
     color: white;
     border: black solid 2px;
     box-shadow: 3px 3px 3px gray;

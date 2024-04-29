@@ -1,5 +1,6 @@
 .review-container {
-    padding-top: 10px
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
 
 .review-name {
@@ -10,4 +11,16 @@
 .review-date {
     color: gray;
     margin-bottom: 5px;
+}
+
+.delete-review-button,
+.post-review-button {
+    margin-top: 5px;
+    background-color: gray;
+    color: white;
+}
+
+.delete-review-button:hover,
+.post-review-button:hover {
+    background-color: rgb(194, 62, 62);
 }

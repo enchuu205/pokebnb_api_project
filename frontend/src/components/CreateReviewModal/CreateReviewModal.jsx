@@ -13,7 +13,7 @@ function CreateReviewModal() {
     const [reviewText, setReviewText] = useState('')
     const [reviewStars, setReviewStars] = useState(0)
     const [activeReviewStars, setActiveReviewStars] = useState(0)
-    // const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({})
 
     const { closeModal } = useModal()
 
@@ -36,19 +36,15 @@ function CreateReviewModal() {
         dispatch(createReviewThunk(review, spotId))
             .then(() => dispatch(loadReviewsThunk(spotId)))
             .then(closeModal)
-            .then(window.location.reload())
-        // .catch(async (res) => {
-        //     const data = await res.json();
-        //     if (data?.errors) {
-        //         setErrors(data.errors);
-        //     }
-        // });
+            .catch(
+                setErrors({ message: 'Server Error or Review from Current User Already Exists' })
+            )
     }
 
     return (
         <div id='review-modal-container'>
             <h2 id='review-header'>How was your stay?</h2>
-            {/* {errors && console.log(errors)} */}
+            {errors.message && <div>{errors.message}</div>}
             <textarea
                 id='review-text-area'
                 placeholder="Leave your review here..."

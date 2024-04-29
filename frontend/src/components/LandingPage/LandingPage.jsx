@@ -8,6 +8,8 @@ import { ManageContext } from "../../context/Manage";
 
 import { AiFillStar } from "react-icons/ai";
 import { Tooltip } from 'react-tooltip'
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import DeleteSpotModal from "../DeleteSpotModal/DeleteSpotModal";
 
 function LandingPage() {
     const dispatch = useDispatch();
@@ -61,8 +63,17 @@ function LandingPage() {
                         <div><span className="spot-price">${spot.price}</span> night</div>
                     </div>
                 </div>
-                {manage && <button onClick={() => navigate(`/spots/${spot.id}/edit`)}>Update</button>}
-                {manage && <button>Delete</button>}
+                {manage &&
+                    <button className='update-button' onClick={() => navigate(`/spots/${spot.id}/edit`)}>
+                        Update
+                    </button>}
+                {manage &&
+                    <button className="delete-button">
+                        <OpenModalMenuItem
+                            itemText='Delete'
+                            modalComponent={<DeleteSpotModal spot={spot} />}
+                        />
+                    </button>}
             </div>
         )
     })
@@ -70,9 +81,9 @@ function LandingPage() {
     return (
         <>
             {manage && <h2>Manage Spots</h2>}
-            {manage && spots.length === 0 && <button onClick={() => createSpotButton()}>Create a New Spot</button>}
+            {manage && spots.length === 0 && <button className='create-spot-button-manage' onClick={() => createSpotButton()}>Create a New Spot</button>}
+            {/* {manage && <button onClick={() => setManage(false)}>Return to all spots</button>} */}
             <div className="all-spots-container">{spotBlockCreator}</div>
-            {manage && <button onClick={() => setManage(false)}>Return to all spots</button>}
         </>
     )
 }
