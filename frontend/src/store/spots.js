@@ -102,7 +102,6 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
     )
 
     if (response.ok) {
-        const message = await response.json()
         dispatch(deleteSpot(spotId))
     }
 }
@@ -110,6 +109,7 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
 // spots reducer
 const spotsReducer = (state = {}, action) => {
     const allSpots = {};
+    let newState = {}
     switch (action.type) {
         case LOAD_SPOTS:
             action.spots.Spots.forEach(spot => {
@@ -124,7 +124,7 @@ const spotsReducer = (state = {}, action) => {
         case UPDATE_SPOT:
             return { ...state, [action.spot.id]: action.spot }
         case DELETE_SPOT:
-            const newState = { ...state }
+            newState = { ...state }
             delete newState[action.spotId]
             return newState
         default:
